@@ -1,0 +1,2344 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Guia Interativo • Programa de Pós-Graduação em Ciência da Informação (PPGCI - UFC)</title>
+  
+  <!-- Google Fonts: Plus Jakarta Sans & Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet" />
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Lucide Icons CDN -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  
+  <!-- Chart.js CDN para visualização de dados das dissertações -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+
+  <!-- Configuração de Cores e Tipografia Institucional UFC -->
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            ufc: {
+              navy: '#003366',
+              royal: '#0055A5',
+              light: '#E6F0FA',
+              gold: '#F2A900',
+              goldDark: '#D99B00',
+              bg: '#F4F7FA',
+              slate: '#1E293B'
+            }
+          },
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            display: ['Plus Jakarta Sans', 'sans-serif']
+          },
+          boxShadow: {
+            'card': '0 4px 20px -2px rgba(0, 51, 102, 0.06)',
+            'card-hover': '0 12px 28px -4px rgba(0, 51, 102, 0.14)'
+          }
+        }
+      }
+    };
+  </script>
+
+  <style>
+    /* Estilos base e refinamentos de transição */
+    body {
+      background-color: #F4F7FA;
+      color: #1E293B;
+      font-family: 'Inter', sans-serif;
+    }
+    h1, h2, h3, h4, .font-display {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+    /* Barra de rolagem sutil para abas em dispositivos móveis */
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .no-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+    /* Padrão geométrico institucional sutil no Hero */
+    .hero-pattern {
+      background-color: #003366;
+      background-image: 
+        radial-gradient(at 85% 15%, rgba(0, 85, 165, 0.65) 0px, transparent 55%),
+        radial-gradient(at 15% 85%, rgba(242, 169, 0, 0.18) 0px, transparent 50%),
+        linear-gradient(135deg, #002244 0%, #003366 55%, #004B93 100%);
+    }
+    /* Animação suave para modais */
+    @keyframes modalFadeIn {
+      from { opacity: 0; transform: translateY(12px) scale(0.98); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+    .modal-animate {
+      animation: modalFadeIn 0.22s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+  </style>
+</head>
+<body class="antialiased selection:bg-ufc-gold selection:text-ufc-navy">
+
+  <!-- ===================================================================== -->
+  <!-- TOPBAR INSTITUCIONAL UFC                                              -->
+  <!-- ===================================================================== -->
+  <div class="bg-[#002244] text-white/90 text-xs py-2 border-b border-white/10">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-wrap items-center justify-between gap-2">
+      <div class="flex items-center gap-2">
+        <span class="inline-block w-2 h-2 rounded-full bg-ufc-gold"></span>
+        <span class="font-medium tracking-wide uppercase">Universidade Federal do Ceará • Centro de Humanidades (CH)</span>
+      </div>
+      <div class="flex items-center gap-4">
+        <a href="https://ppgci.ufc.br/" target="_blank" rel="noopener noreferrer" class="hover:text-ufc-gold transition-colors flex items-center gap-1">
+          <span>Portal Oficial PPGCI</span>
+          <i data-lucide="external-link" class="w-3 h-3"></i>
+        </a>
+        <span class="text-white/30">|</span>
+        <span class="text-white/75 hidden sm:inline">Campus do Benfica • Fortaleza - CE</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================================================================== -->
+  <!-- HERO BANNER / CABEÇALHO PRINCIPAL                                     -->
+  <!-- ===================================================================== -->
+  <header class="hero-pattern text-white relative overflow-hidden">
+    <!-- Elementos decorativos de fundo -->
+    <div class="absolute inset-0 opacity-10 pointer-events-none">
+      <svg class="w-full h-full" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <pattern id="grid-pattern" width="40" height="40" patternUnits="userSpaceOnUse">
+            <path d="M 40 0 L 0 0 0 40" fill="none" stroke="white" stroke-width="0.8"/>
+          </pattern>
+        </defs>
+        <rect width="100%" height="100%" fill="url(#grid-pattern)" />
+      </svg>
+    </div>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-10 pb-14 lg:pt-14 lg:pb-20 relative z-10">
+      <!-- Identidade Visual Oficial / Logomarca Vetorial Vazada PPGCi UFC -->
+      <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-8">
+        <div class="max-w-3xl">
+          <div class="inline-flex items-center gap-4 bg-white/10 text-white backdrop-blur-sm border border-white/20 rounded-2xl px-5 py-3 mb-6 shadow-lg shadow-black/15">
+            <!-- Logomarca Oficial PPGCi UFC Vazada em Branco Puro (#FFFFFF, Fundo Transparente, 100% Autocontida) -->
+            <svg width="168" height="58" viewBox="0 0 340 118" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Logomarca oficial vazada do Programa de Pós-Graduação em Ciência da Informação - PPGCi UFC" class="shrink-0">
+              <defs>
+                <!-- Filtro vetorial sutil de textura orgânica pincelada para o "Ci" caligráfico -->
+                <filter id="ppgci-brush-hero" x="-5%" y="-5%" width="110%" height="110%">
+                  <feTurbulence type="fractalNoise" baseFrequency="0.55" numOctaves="3" seed="12" result="noise" />
+                  <feDisplacementMap in="SourceGraphic" in2="noise" scale="2.1" xChannelSelector="R" yChannelSelector="G" />
+                </filter>
+              </defs>
+
+              <!-- Letras "PPG" em branco puro (#FFFFFF), tipografia condensada alta -->
+              <g fill="#FFFFFF">
+                <!-- P (1) -->
+                <path d="M12 20H32.5C42.2 20 47.5 25.4 47.5 36.2V45.8C47.5 56.6 42.2 62 32.5 62H23.2V95H12V20ZM23.2 29.8V52.2H31.4C34.8 52.2 36.3 50.2 36.3 45.2V36.8C36.3 31.8 34.8 29.8 31.4 29.8H23.2Z" />
+                <!-- P (2) -->
+                <path d="M55 20H75.5C85.2 20 90.5 25.4 90.5 36.2V45.8C90.5 56.6 85.2 62 75.5 62H66.2V95H55V20ZM66.2 29.8V52.2H74.4C77.8 52.2 79.3 50.2 79.3 45.2V36.8C79.3 31.8 77.8 29.8 74.4 29.8H66.2Z" />
+                <!-- G -->
+                <path d="M115.5 19.2C127.6 19.2 133.5 25.4 133.5 37.8V42.4H122.6V37.2C122.6 31.6 120.4 29.2 115.8 29.2C111.1 29.2 108.9 31.6 108.9 37.2V77.8C108.9 83.4 111.1 85.8 115.8 85.8C120.4 85.8 122.6 83.4 122.6 77.8V64.5H115.2V55.2H133.5V77.2C133.5 89.6 127.6 95.8 115.5 95.8C103.4 95.8 97.5 89.6 97.5 77.2V37.8C97.5 25.4 103.4 19.2 115.5 19.2Z" />
+              </g>
+
+              <!-- Conjunto caligráfico "Ci" em branco puro (#FFFFFF) com pincelada artística -->
+              <g filter="url(#ppgci-brush-hero)">
+                <!-- "C" maiúsculo caligráfico espesso com curva ascendente final -->
+                <path d="M185.8 33.5C188.6 26.2 190.2 17.8 186.8 14.4C183.2 10.8 173.4 11.4 165.6 16.5C153.2 24.6 144.8 43.4 142.2 63.8C139.6 83.5 144.8 98.2 157.8 100.4C171.4 102.6 186.5 91.2 201.4 72.5L197.2 68.4C184.5 83.6 172.4 91.2 163.2 89.6C155.8 88.2 153.6 77.8 156.2 61.5C158.8 44.8 166.4 27.6 174.8 23.2C178.4 21.3 180.5 22.8 179.4 27.2C178.5 30.8 176.8 33.2 178.6 35.4C180.4 37.5 184.2 37.2 185.8 33.5Z" fill="#FFFFFF" />
+                <!-- "i" minúsculo caligráfico fluido com cauda ascendente à direita -->
+                <path d="M198.2 58.5C201.5 52.8 205.8 48.2 210.4 48.6C214.8 49.0 216.2 53.6 214.6 60.4L209.4 81.8C208.1 87.2 209.6 89.8 213.2 89.2C217.8 88.4 226.4 79.6 239.2 62.4L243.4 66.2C229.2 85.4 217.6 97.6 207.4 99.4C199.4 100.8 194.8 95.6 196.8 85.2L201.8 62.6C202.4 59.8 201.4 58.8 199.4 60.6L198.2 58.5Z" fill="#FFFFFF" />
+                <!-- Pingo do "i" em branco puro (#FFFFFF) no formato de folha / pincelada orgânica -->
+                <path d="M204.5 26.8C208.6 20.4 216.8 18.8 222.4 22.6C226.5 25.4 227.2 31.2 223.8 35.6C220.4 40.0 213.6 39.4 208.8 35.2C205.6 32.4 202.8 29.4 204.5 26.8Z" fill="#FFFFFF" />
+              </g>
+
+              <!-- Letras "UFC" menores em branco puro (#FFFFFF) alinhadas à base inferior -->
+              <g fill="#FFFFFF">
+                <!-- U estilizado (com haste esquerda prolongada conforme identidade da marca) -->
+                <path d="M251 54H258.4V85.5C258.4 89.2 259.9 90.8 263.1 90.8C266.3 90.8 267.8 89.2 267.8 85.5V54H275.2V85.2C275.2 93.4 271.2 97.4 263.1 97.4C261.2 97.4 259.6 97.1 258.4 96.6V102.5H251V54Z" />
+                <!-- F -->
+                <path d="M281.5 54H300.5V60.6H288.9V72.2H298.4V78.8H288.9V96.6H281.5V54Z" />
+                <!-- C -->
+                <path d="M316.2 53.4C324.2 53.4 328.2 57.6 328.2 65.8V69.2H321V65.4C321 61.6 319.5 60.0 316.4 60.0C313.3 60.0 311.8 61.6 311.8 65.4V84.6C311.8 88.4 313.3 90.0 316.4 90.0C319.5 90.0 321 88.4 321 84.6V80.4H328.2V84.2C328.2 92.4 324.2 96.6 316.2 96.6C308.2 96.6 304.2 92.4 304.2 84.2V65.8C304.2 57.6 308.2 53.4 316.2 53.4Z" />
+              </g>
+            </svg>
+
+            <div class="hidden sm:block h-11 w-px bg-white/25"></div>
+            <div class="text-left leading-tight hidden sm:block">
+              <div class="text-xs font-extrabold uppercase tracking-wider text-white">Departamento de Ciências da Informação</div>
+              <div class="text-xs font-medium text-blue-100 mt-0.5">Centro de Humanidades • Pós-Graduação Stricto Sensu</div>
+            </div>
+          </div>
+
+          <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight leading-[1.15] mb-4">
+            Guia Interativo: <span class="text-ufc-gold">Programa de Pós-Graduação em Ciência da Informação</span> (PPGCI - UFC)
+          </h1>
+
+          <p class="text-base sm:text-lg text-blue-100/90 leading-relaxed mb-7 max-w-2xl">
+            Mestrado Acadêmico em Ciência da Informação • Área de Concentração: 
+            <strong class="text-white font-semibold underline decoration-ufc-gold/80 decoration-2 underline-offset-4">
+              Representação e Mediação da Informação e do Conhecimento
+            </strong>.
+          </p>
+
+          <!-- Botões de Ação Rápida -->
+          <div class="flex flex-wrap items-center gap-3">
+            <a href="#apresentacao" class="inline-flex items-center gap-2 bg-ufc-gold hover:bg-ufc-goldDark text-ufc-navy font-bold px-5 py-3 rounded-xl shadow-lg shadow-black/20 transition-all transform hover:-translate-y-0.5 text-sm">
+              <i data-lucide="compass" class="w-4 h-4"></i>
+              <span>Explorar o Programa</span>
+            </a>
+            <a href="#simulador" class="inline-flex items-center gap-2 bg-white/12 hover:bg-white/20 text-white border border-white/25 font-semibold px-5 py-3 rounded-xl backdrop-blur-sm transition-all text-sm">
+              <i data-lucide="check-circle-2" class="w-4 h-4 text-ufc-gold"></i>
+              <span>Simulador do Mestrando</span>
+            </a>
+            <button onclick="openBannerFiltroGlobal()" id="btn-filtro-ativo-hero" class="hidden inline-flex items-center gap-2 bg-emerald-500/20 border border-emerald-400/40 text-emerald-200 font-medium px-4 py-3 rounded-xl text-xs">
+              <i data-lucide="filter" class="w-3.5 h-3.5"></i>
+              <span id="texto-filtro-hero">Filtro ativo</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Card Destaque Lateral (Ficha Rápida) -->
+        <div class="bg-white/10 backdrop-blur-md border border-white/15 rounded-2xl p-5 sm:p-6 lg:w-80 shrink-0 shadow-xl">
+          <div class="flex items-center justify-between border-b border-white/15 pb-3 mb-4">
+            <span class="text-xs font-bold uppercase tracking-wider text-ufc-gold">Ficha Institucional</span>
+            <span class="px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-emerald-400/20 text-emerald-200 border border-emerald-400/30">CAPES / MEC</span>
+          </div>
+          <ul class="space-y-3 text-sm">
+            <li class="flex items-start gap-2.5">
+              <i data-lucide="graduation-cap" class="w-4 h-4 text-ufc-gold shrink-0 mt-0.5"></i>
+              <div>
+                <span class="text-white/70 text-xs block">Modalidade e Nível</span>
+                <span class="font-semibold text-white">Mestrado Acadêmico (Presencial)</span>
+              </div>
+            </li>
+            <li class="flex items-start gap-2.5">
+              <i data-lucide="clock" class="w-4 h-4 text-ufc-gold shrink-0 mt-0.5"></i>
+              <div>
+                <span class="text-white/70 text-xs block">Duração Regular</span>
+                <span class="font-semibold text-white">24 meses (4 semestres)</span>
+              </div>
+            </li>
+            <li class="flex items-start gap-2.5">
+              <i data-lucide="award" class="w-4 h-4 text-ufc-gold shrink-0 mt-0.5"></i>
+              <div>
+                <span class="text-white/70 text-xs block">Título Conferido</span>
+                <span class="font-semibold text-white">Mestre(a) em Ciência da Informação</span>
+              </div>
+            </li>
+            <li class="flex items-start gap-2.5">
+              <i data-lucide="map-pin" class="w-4 h-4 text-ufc-gold shrink-0 mt-0.5"></i>
+              <div>
+                <span class="text-white/70 text-xs block">Sede Acadêmica</span>
+                <span class="font-semibold text-white">CH II • Av. da Universidade, 2762</span>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- KPIs em Destaque (5 Indicadores-Chave) -->
+      <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 sm:gap-4 mt-10 pt-8 border-t border-white/15">
+        <div class="bg-white/10 backdrop-blur-sm border border-white/15 rounded-2xl p-4 hover:bg-white/15 transition-colors">
+          <div class="flex items-center justify-between mb-1">
+            <span class="text-xs font-medium text-blue-200">Nível</span>
+            <i data-lucide="book-open-check" class="w-4 h-4 text-ufc-gold"></i>
+          </div>
+          <div class="text-xl sm:text-2xl font-display font-extrabold text-white">Mestrado</div>
+          <div class="text-[11px] text-blue-100/80 mt-0.5">Acadêmico Stricto Sensu</div>
+        </div>
+
+        <div class="bg-white/10 backdrop-blur-sm border border-white/15 rounded-2xl p-4 hover:bg-white/15 transition-colors">
+          <div class="flex items-center justify-between mb-1">
+            <span class="text-xs font-medium text-blue-200">Estrutura</span>
+            <i data-lucide="git-branch" class="w-4 h-4 text-ufc-gold"></i>
+          </div>
+          <div class="text-xl sm:text-2xl font-display font-extrabold text-white">2 Linhas</div>
+          <div class="text-[11px] text-blue-100/80 mt-0.5">De Pesquisa articuladas</div>
+        </div>
+
+        <div class="bg-white/10 backdrop-blur-sm border border-white/15 rounded-2xl p-4 hover:bg-white/15 transition-colors">
+          <div class="flex items-center justify-between mb-1">
+            <span class="text-xs font-medium text-blue-200">Integralização</span>
+            <i data-lucide="layers" class="w-4 h-4 text-ufc-gold"></i>
+          </div>
+          <div class="text-xl sm:text-2xl font-display font-extrabold text-white">24 Créditos</div>
+          <div class="text-[11px] text-blue-100/80 mt-0.5">16 Disciplinas + 8 Dissertação</div>
+        </div>
+
+        <div class="bg-white/10 backdrop-blur-sm border border-white/15 rounded-2xl p-4 hover:bg-white/15 transition-colors">
+          <div class="flex items-center justify-between mb-1">
+            <span class="text-xs font-medium text-blue-200">Pesquisa CNPq</span>
+            <i data-lucide="network" class="w-4 h-4 text-ufc-gold"></i>
+          </div>
+          <div class="text-xl sm:text-2xl font-display font-extrabold text-white">5+ Grupos</div>
+          <div class="text-[11px] text-blue-100/80 mt-0.5">Núcleos ativos certificados</div>
+        </div>
+
+        <div class="col-span-2 sm:col-span-1 bg-white/10 backdrop-blur-sm border border-white/15 rounded-2xl p-4 hover:bg-white/15 transition-colors">
+          <div class="flex items-center justify-between mb-1">
+            <span class="text-xs font-medium text-blue-200">Orientação</span>
+            <i data-lucide="users" class="w-4 h-4 text-ufc-gold"></i>
+          </div>
+          <div class="text-xl sm:text-2xl font-display font-extrabold text-white">18 Docentes</div>
+          <div class="text-[11px] text-blue-100/80 mt-0.5">Permanentes e colaboradores</div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ===================================================================== -->
+  <!-- BARRA DE NAVEGAÇÃO INTERATIVA (STICKY NAVBAR)                         -->
+  <!-- ===================================================================== -->
+  <nav id="sticky-navbar" class="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-slate-200/90 shadow-sm">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-14 gap-4">
+        <!-- Links de Navegação Rápida -->
+        <div class="flex items-center gap-1 sm:gap-2 overflow-x-auto no-scrollbar py-1 w-full">
+          <a href="#apresentacao" data-nav="apresentacao" class="nav-pill shrink-0 px-3.5 py-2 rounded-xl text-xs sm:text-sm font-semibold text-ufc-navy bg-ufc-light transition-all flex items-center gap-1.5">
+            <i data-lucide="landmark" class="w-3.5 h-3.5"></i>
+            <span>Apresentação</span>
+          </a>
+          <a href="#linhas" data-nav="linhas" class="nav-pill shrink-0 px-3.5 py-2 rounded-xl text-xs sm:text-sm font-medium text-slate-600 hover:text-ufc-navy hover:bg-slate-100 transition-all flex items-center gap-1.5">
+            <i data-lucide="git-fork" class="w-3.5 h-3.5"></i>
+            <span>Linhas de Pesquisa</span>
+          </a>
+          <a href="#disciplinas" data-nav="disciplinas" class="nav-pill shrink-0 px-3.5 py-2 rounded-xl text-xs sm:text-sm font-medium text-slate-600 hover:text-ufc-navy hover:bg-slate-100 transition-all flex items-center gap-1.5">
+            <i data-lucide="book-marked" class="w-3.5 h-3.5"></i>
+            <span>Currículo & Disciplinas</span>
+          </a>
+          <a href="#docentes" data-nav="docentes" class="nav-pill shrink-0 px-3.5 py-2 rounded-xl text-xs sm:text-sm font-medium text-slate-600 hover:text-ufc-navy hover:bg-slate-100 transition-all flex items-center gap-1.5">
+            <i data-lucide="user-check" class="w-3.5 h-3.5"></i>
+            <span>Corpo Docente</span>
+          </a>
+          <a href="#grupos-producao" data-nav="grupos-producao" class="nav-pill shrink-0 px-3.5 py-2 rounded-xl text-xs sm:text-sm font-medium text-slate-600 hover:text-ufc-navy hover:bg-slate-100 transition-all flex items-center gap-1.5">
+            <i data-lucide="library" class="w-3.5 h-3.5"></i>
+            <span>Grupos & Dissertações</span>
+          </a>
+          <a href="#simulador" data-nav="simulador" class="nav-pill shrink-0 px-3.5 py-2 rounded-xl text-xs sm:text-sm font-medium text-slate-600 hover:text-ufc-navy hover:bg-slate-100 transition-all flex items-center gap-1.5">
+            <i data-lucide="calendar-check" class="w-3.5 h-3.5"></i>
+            <span>Jornada 24 Meses</span>
+          </a>
+        </div>
+
+        <!-- Indicador de Filtro Global por Linha (Desktop) -->
+        <div id="global-filter-badge" class="hidden shrink-0 items-center gap-2 bg-ufc-navy text-white text-xs font-semibold px-3 py-1.5 rounded-xl">
+          <span id="global-filter-label">Linha 1</span>
+          <button onclick="setGlobalLinhaFilter('all')" title="Limpar filtro de linha" class="hover:text-ufc-gold transition-colors">
+            <i data-lucide="x" class="w-3.5 h-3.5"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Banner Flutuante de Filtro Cruzado por Linha de Pesquisa -->
+  <div id="cross-filter-banner" class="hidden bg-ufc-royal text-white py-2.5 px-4 shadow-md transition-all">
+    <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-2 text-xs sm:text-sm">
+      <div class="flex items-center gap-2">
+        <span class="bg-ufc-gold text-ufc-navy font-bold px-2 py-0.5 rounded-md text-xs">FILTRO ATIVO</span>
+        <span id="cross-filter-text">Exibindo disciplinas, docentes e grupos vinculados à Linha selecionada.</span>
+      </div>
+      <button onclick="setGlobalLinhaFilter('all')" class="bg-white/15 hover:bg-white/25 text-white font-semibold px-3 py-1 rounded-lg transition-colors flex items-center gap-1 text-xs">
+        <i data-lucide="rotate-ccw" class="w-3.5 h-3.5"></i>
+        <span>Mostrar Todas as Linhas</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- ===================================================================== -->
+  <!-- CONTEÚDO PRINCIPAL                                                    -->
+  <!-- ===================================================================== -->
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-14 space-y-16 sm:space-y-24">
+
+    <!-- =================================================================== -->
+    <!-- SEÇÃO 1: APRESENTAÇÃO & HISTÓRICO                                   -->
+    <!-- =================================================================== -->
+    <section id="apresentacao" class="scroll-mt-20">
+      <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8">
+        <div>
+          <span class="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-ufc-royal bg-ufc-light px-3 py-1 rounded-full mb-2">
+            <i data-lucide="landmark" class="w-3.5 h-3.5"></i>
+            Institucional • ppgci.ufc.br/apresentacao
+          </span>
+          <h2 class="text-2xl sm:text-3xl font-display font-extrabold text-ufc-navy">
+            Apresentação e Identidade Acadêmica
+          </h2>
+        </div>
+        <a href="https://ppgci.ufc.br/apresentacao/" target="_blank" rel="noopener noreferrer" class="text-sm font-semibold text-ufc-royal hover:text-ufc-navy flex items-center gap-1.5 transition-colors">
+          <span>Ver página oficial no portal UFC</span>
+          <i data-lucide="arrow-up-right" class="w-4 h-4"></i>
+        </a>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8">
+        <!-- Coluna Esquerda: Contextualização e Área de Concentração -->
+        <div class="lg:col-span-7 space-y-6">
+          <div class="bg-white rounded-2xl p-6 sm:p-8 shadow-card border border-slate-100">
+            <h3 class="text-lg sm:text-xl font-bold text-ufc-navy mb-3 flex items-center gap-2.5">
+              <span class="w-8 h-8 rounded-xl bg-ufc-light text-ufc-royal flex items-center justify-center shrink-0">
+                <i data-lucide="book-open" class="w-4 h-4"></i>
+              </span>
+              <span>Contextualização do Programa</span>
+            </h3>
+            <p class="text-slate-600 leading-relaxed mb-4 text-sm sm:text-base">
+              O <strong>Programa de Pós-Graduação em Ciência da Informação (PPGCI)</strong> da Universidade Federal do Ceará (UFC), vinculado ao <strong>Departamento de Ciências da Informação (DCINF)</strong> do Centro de Humanidades (CH), consolida a formação pós-graduada no Ceará e no Nordeste, articulando ensino, pesquisa científica e impacto sociocultural.
+            </p>
+            <p class="text-slate-600 leading-relaxed text-sm sm:text-base">
+              Com sede no histórico <strong>Campus do Benfica</strong> em Fortaleza, o programa responde às demandas contemporâneas da sociedade da informação e do conhecimento, investigando desde os fundamentos epistemológicos e métodos de organização até os processos críticos de mediação, acesso, memória, tecnologias digitais e gestão informacional.
+            </p>
+          </div>
+
+          <!-- Card Interativo: Área de Concentração -->
+          <div class="bg-gradient-to-br from-ufc-navy to-ufc-royal text-white rounded-2xl p-6 sm:p-8 shadow-card relative overflow-hidden">
+            <div class="flex flex-wrap items-center justify-between gap-2 mb-3">
+              <span class="text-xs font-bold uppercase tracking-wider bg-ufc-gold text-ufc-navy px-3 py-1 rounded-full">
+                Área de Concentração Única
+              </span>
+              <button onclick="toggleAreaDetalhes()" class="text-xs font-semibold bg-white/15 hover:bg-white/25 px-3 py-1.5 rounded-xl transition-colors flex items-center gap-1.5">
+                <i data-lucide="sparkles" class="w-3.5 h-3.5 text-ufc-gold"></i>
+                <span id="btn-area-text">Ver Eixos Articuladores</span>
+              </button>
+            </div>
+            <h3 class="text-xl sm:text-2xl font-display font-extrabold mb-3">
+              Representação e Mediação da Informação e do Conhecimento
+            </h3>
+            <p class="text-blue-100 text-sm sm:text-base leading-relaxed">
+              Compreende o estudo interdisciplinar dos fenômenos, processos, sistemas, linguagens e práticas sociais envolvidos na produção, organização, representação, preservação, gestão e apropriação da informação e do conhecimento em múltiplos suportes e contextos.
+            </p>
+
+            <!-- Detalhe Expandível da Área de Concentração -->
+            <div id="area-detalhes-box" class="hidden mt-5 pt-5 border-t border-white/20 grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm">
+              <div class="bg-white/10 rounded-xl p-4">
+                <div class="font-bold text-ufc-gold mb-1 flex items-center gap-1.5">
+                  <i data-lucide="database" class="w-4 h-4"></i>
+                  <span>Dimensão da Representação</span>
+                </div>
+                <p class="text-blue-100 text-xs leading-relaxed">
+                  Foca na modelagem conceitual, linguagens documentárias, metadados, ontologias, recuperação e preservação da informação.
+                </p>
+              </div>
+              <div class="bg-white/10 rounded-xl p-4">
+                <div class="font-bold text-ufc-gold mb-1 flex items-center gap-1.5">
+                  <i data-lucide="users-round" class="w-4 h-4"></i>
+                  <span>Dimensão da Mediação</span>
+                </div>
+                <p class="text-blue-100 text-xs leading-relaxed">
+                  Investiga a apropriação simbólica e cultural, competência em informação, gestão organizacional, políticas públicas e protagonismo social.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Coluna Direita: Abas/Acordeões Interativos (Missão, Egresso, Infraestrutura) -->
+        <div class="lg:col-span-5 bg-white rounded-2xl p-6 sm:p-7 shadow-card border border-slate-100 flex flex-col justify-between">
+          <div>
+            <h3 class="text-lg font-bold text-ufc-navy mb-4">Pilares Institucionais</h3>
+            
+            <!-- Seletor de Abas Internas -->
+            <div class="grid grid-cols-3 gap-1.5 bg-slate-100 p-1.5 rounded-xl mb-5" role="tablist">
+              <button onclick="switchPilarTab('missao')" id="tab-pilar-missao" class="pilar-tab-btn py-2 px-2 rounded-lg text-xs font-bold bg-white text-ufc-navy shadow-sm transition-all">
+                Missão & Objetivos
+              </button>
+              <button onclick="switchPilarTab('egresso')" id="tab-pilar-egresso" class="pilar-tab-btn py-2 px-2 rounded-lg text-xs font-semibold text-slate-600 hover:text-ufc-navy transition-all">
+                Perfil do Egresso
+              </button>
+              <button onclick="switchPilarTab('infra')" id="tab-pilar-infra" class="pilar-tab-btn py-2 px-2 rounded-lg text-xs font-semibold text-slate-600 hover:text-ufc-navy transition-all">
+                Infraestrutura
+              </button>
+            </div>
+
+            <!-- Conteúdo Aba 1: Missão -->
+            <div id="content-pilar-missao" class="pilar-content space-y-3.5 text-sm text-slate-600">
+              <p class="leading-relaxed">
+                Formar <strong>pesquisadores, docentes para o ensino superior e profissionais altamente qualificados</strong> capazes de produzir conhecimento científico inovador e propor soluções críticas no campo da Ciência da Informação.
+              </p>
+              <ul class="space-y-2.5 pt-1">
+                <li class="flex items-start gap-2.5">
+                  <span class="w-5 h-5 rounded-full bg-ufc-light text-ufc-royal flex items-center justify-center shrink-0 mt-0.5">
+                    <i data-lucide="check" class="w-3.5 h-3.5"></i>
+                  </span>
+                  <span>Consolidar a pesquisa interdisciplinar sobre informação, cultura, tecnologia e memória no Nordeste.</span>
+                </li>
+                <li class="flex items-start gap-2.5">
+                  <span class="w-5 h-5 rounded-full bg-ufc-light text-ufc-royal flex items-center justify-center shrink-0 mt-0.5">
+                    <i data-lucide="check" class="w-3.5 h-3.5"></i>
+                  </span>
+                  <span>Promover o intercâmbio acadêmico com redes nacionais (ANCIB/ENANCIB) e internacionais.</span>
+                </li>
+                <li class="flex items-start gap-2.5">
+                  <span class="w-5 h-5 rounded-full bg-ufc-light text-ufc-royal flex items-center justify-center shrink-0 mt-0.5">
+                    <i data-lucide="check" class="w-3.5 h-3.5"></i>
+                  </span>
+                  <span>Contribuir para políticas públicas de acesso à informação, ciência aberta e cidadania.</span>
+                </li>
+              </ul>
+            </div>
+
+            <!-- Conteúdo Aba 2: Perfil do Egresso -->
+            <div id="content-pilar-egresso" class="pilar-content hidden space-y-3.5 text-sm text-slate-600">
+              <p class="leading-relaxed">
+                O(A) Mestre(a) em Ciência da Informação pela UFC desenvolve autonomia teórico-metodológica e visão ética para atuar em ambientes acadêmicos, públicos e corporativos:
+              </p>
+              <div class="grid grid-cols-1 gap-2.5 pt-1">
+                <div class="p-3 rounded-xl bg-slate-50 border border-slate-100">
+                  <div class="font-bold text-ufc-navy text-xs">Docência e Pesquisa</div>
+                  <div class="text-xs text-slate-600 mt-0.5">Preparação sólida para atuação no magistério superior e ingresso em programas de Doutorado.</div>
+                </div>
+                <div class="p-3 rounded-xl bg-slate-50 border border-slate-100">
+                  <div class="font-bold text-ufc-navy text-xs">Gestão & Arquitetura Informacional</div>
+                  <div class="text-xs text-slate-600 mt-0.5">Liderança em bibliotecas universitárias, arquivos, museus, repositórios digitais e centros de documentação.</div>
+                </div>
+                <div class="p-3 rounded-xl bg-slate-50 border border-slate-100">
+                  <div class="font-bold text-ufc-navy text-xs">Inovação e Mediação Cultural</div>
+                  <div class="text-xs text-slate-600 mt-0.5">Consultoria em governança de dados, letramento informacional e projetos socioculturais.</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Conteúdo Aba 3: Infraestrutura e Localização -->
+            <div id="content-pilar-infra" class="pilar-content hidden space-y-3.5 text-sm text-slate-600">
+              <div class="p-3.5 rounded-xl bg-ufc-light/70 border border-ufc-royal/15">
+                <div class="font-bold text-ufc-navy flex items-center gap-1.5 mb-1">
+                  <i data-lucide="map-pin" class="w-4 h-4 text-ufc-royal"></i>
+                  <span>Endereço Institucional</span>
+                </div>
+                <p class="text-xs text-slate-700 leading-relaxed">
+                  Av. da Universidade, 2762 — Centro de Humanidades (Área 2 / Departamento de Ciências da Informação), Bairro Benfica, CEP 60020-181, Fortaleza - CE.
+                </p>
+              </div>
+              <ul class="space-y-2 text-xs text-slate-600">
+                <li class="flex items-center gap-2">
+                  <i data-lucide="building-2" class="w-4 h-4 text-ufc-royal shrink-0"></i>
+                  <span>Salas de aula climatizadas e equipadas com recursos multimídia no CH-II.</span>
+                </li>
+                <li class="flex items-center gap-2">
+                  <i data-lucide="monitor" class="w-4 h-4 text-ufc-royal shrink-0"></i>
+                  <span>Laboratórios de Tecnologias Informacionais e Práticas de Representação.</span>
+                </li>
+                <li class="flex items-center gap-2">
+                  <i data-lucide="library" class="w-4 h-4 text-ufc-royal shrink-0"></i>
+                  <span>Acesso integral ao Sistema de Bibliotecas da UFC (Biblioteca de Ciências Humanas - BCH) e Portal de Periódicos CAPES.</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Rodapé do card de pilares -->
+          <div class="mt-6 pt-4 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
+            <span>Secretaria do PPGCI / DCINF</span>
+            <a href="mailto:ppgci@ufc.br" class="font-semibold text-ufc-royal hover:underline flex items-center gap-1">
+              <i data-lucide="mail" class="w-3.5 h-3.5"></i>
+              <span>ppgci@ufc.br</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =================================================================== -->
+    <!-- SEÇÃO 2: LINHAS DE PESQUISA (COM FILTRO DINÂMICO CRUZADO)           -->
+    <!-- =================================================================== -->
+    <section id="linhas" class="scroll-mt-20">
+      <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8">
+        <div>
+          <span class="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-ufc-royal bg-ufc-light px-3 py-1 rounded-full mb-2">
+            <i data-lucide="git-fork" class="w-3.5 h-3.5"></i>
+            Eixos Investigativos • ppgci.ufc.br/pesquisas
+          </span>
+          <h2 class="text-2xl sm:text-3xl font-display font-extrabold text-ufc-navy">
+            Linhas de Pesquisa do PPGCI
+          </h2>
+          <p class="text-slate-600 text-sm sm:text-base mt-1">
+            Clique em uma Linha de Pesquisa abaixo para destacar automaticamente as disciplinas, docentes e grupos vinculados a ela em todo o guia.
+          </p>
+        </div>
+        <button onclick="setGlobalLinhaFilter('all')" id="btn-reset-linhas" class="hidden self-start md:self-auto px-4 py-2 rounded-xl bg-slate-200 hover:bg-slate-300 text-slate-800 text-xs font-bold transition-colors flex items-center gap-1.5">
+          <i data-lucide="rotate-ccw" class="w-3.5 h-3.5"></i>
+          <span>Exibir Ambas as Linhas</span>
+        </button>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8">
+        <!-- Card Linha 1 -->
+        <div id="card-linha-1" onclick="setGlobalLinhaFilter('L1')" class="cursor-pointer group bg-white rounded-2xl p-6 sm:p-8 shadow-card hover:shadow-card-hover border-2 border-transparent transition-all relative overflow-hidden">
+          <div class="absolute top-0 right-0 w-32 h-32 bg-ufc-royal/5 rounded-bl-full -mr-8 -mt-8 transition-transform group-hover:scale-110"></div>
+          
+          <div class="flex items-start justify-between gap-4 mb-4">
+            <div class="flex items-center gap-3">
+              <div class="w-12 h-12 rounded-2xl bg-ufc-navy text-white flex items-center justify-center font-display font-extrabold text-lg shadow-sm">
+                L1
+              </div>
+              <div>
+                <span class="text-xs font-bold uppercase tracking-wider text-ufc-royal">Linha de Pesquisa 1</span>
+                <h3 class="text-lg sm:text-xl font-display font-extrabold text-ufc-navy leading-snug">
+                  Representação da Informação e do Conhecimento
+                </h3>
+              </div>
+            </div>
+            <span id="badge-select-L1" class="shrink-0 px-3 py-1 rounded-full text-xs font-bold bg-slate-100 text-slate-600 group-hover:bg-ufc-light group-hover:text-ufc-royal transition-colors">
+              Filtrar Linha 1
+            </span>
+          </div>
+
+          <p class="text-slate-600 text-sm sm:text-base leading-relaxed mb-5">
+            <strong>Ementa:</strong> Estudos teóricos, metodológicos e aplicados sobre organização, análise, indexação, classificação, ontologias, metadados, recuperação e preservação da informação e do conhecimento em ambientes analógicos e digitais.
+          </p>
+
+          <!-- Tags de Temáticas -->
+          <div class="flex flex-wrap gap-2 mb-6">
+            <span class="px-2.5 py-1 rounded-lg bg-slate-100 text-slate-700 text-xs font-medium">Organização do Conhecimento</span>
+            <span class="px-2.5 py-1 rounded-lg bg-slate-100 text-slate-700 text-xs font-medium">Indexação & Catalogação</span>
+            <span class="px-2.5 py-1 rounded-lg bg-slate-100 text-slate-700 text-xs font-medium">Ontologias & Web Semântica</span>
+            <span class="px-2.5 py-1 rounded-lg bg-slate-100 text-slate-700 text-xs font-medium">Metadados & Recuperação</span>
+            <span class="px-2.5 py-1 rounded-lg bg-slate-100 text-slate-700 text-xs font-medium">Preservação Digital</span>
+          </div>
+
+          <!-- Contadores dinâmicos da Linha 1 -->
+          <div class="pt-4 border-t border-slate-100 flex items-center justify-between text-xs font-semibold text-slate-500">
+            <div class="flex items-center gap-4">
+              <span class="flex items-center gap-1 text-ufc-navy">
+                <i data-lucide="users" class="w-4 h-4 text-ufc-royal"></i>
+                <span id="count-docentes-L1">0</span> Docentes
+              </span>
+              <span class="flex items-center gap-1 text-ufc-navy">
+                <i data-lucide="book" class="w-4 h-4 text-ufc-royal"></i>
+                <span id="count-disc-L1">0</span> Disciplinas
+              </span>
+            </div>
+            <span class="text-ufc-royal group-hover:translate-x-1 transition-transform flex items-center gap-1">
+              <span>Clique para filtrar</span>
+              <i data-lucide="chevron-right" class="w-4 h-4"></i>
+            </span>
+          </div>
+        </div>
+
+        <!-- Card Linha 2 -->
+        <div id="card-linha-2" onclick="setGlobalLinhaFilter('L2')" class="cursor-pointer group bg-white rounded-2xl p-6 sm:p-8 shadow-card hover:shadow-card-hover border-2 border-transparent transition-all relative overflow-hidden">
+          <div class="absolute top-0 right-0 w-32 h-32 bg-ufc-gold/10 rounded-bl-full -mr-8 -mt-8 transition-transform group-hover:scale-110"></div>
+          
+          <div class="flex items-start justify-between gap-4 mb-4">
+            <div class="flex items-center gap-3">
+              <div class="w-12 h-12 rounded-2xl bg-ufc-gold text-ufc-navy flex items-center justify-center font-display font-extrabold text-lg shadow-sm">
+                L2
+              </div>
+              <div>
+                <span class="text-xs font-bold uppercase tracking-wider text-amber-700">Linha de Pesquisa 2</span>
+                <h3 class="text-lg sm:text-xl font-display font-extrabold text-ufc-navy leading-snug">
+                  Mediação e Gestão da Informação e do Conhecimento
+                </h3>
+              </div>
+            </div>
+            <span id="badge-select-L2" class="shrink-0 px-3 py-1 rounded-full text-xs font-bold bg-slate-100 text-slate-600 group-hover:bg-amber-100 group-hover:text-amber-800 transition-colors">
+              Filtrar Linha 2
+            </span>
+          </div>
+
+          <p class="text-slate-600 text-sm sm:text-base leading-relaxed mb-5">
+            <strong>Ementa:</strong> Processos de apropriação, mediação cultural e informacional, competência em informação, gestão da informação e do conhecimento, políticas públicas, memória, patrimônio e tecnologias digitais na sociedade.
+          </p>
+
+          <!-- Tags de Temáticas -->
+          <div class="flex flex-wrap gap-2 mb-6">
+            <span class="px-2.5 py-1 rounded-lg bg-slate-100 text-slate-700 text-xs font-medium">Mediação Cultural & Informacional</span>
+            <span class="px-2.5 py-1 rounded-lg bg-slate-100 text-slate-700 text-xs font-medium">Competência em Informação</span>
+            <span class="px-2.5 py-1 rounded-lg bg-slate-100 text-slate-700 text-xs font-medium">Gestão da Informação & Inovação</span>
+            <span class="px-2.5 py-1 rounded-lg bg-slate-100 text-slate-700 text-xs font-medium">Memória & Patrimônio</span>
+            <span class="px-2.5 py-1 rounded-lg bg-slate-100 text-slate-700 text-xs font-medium">Comunicação Científica</span>
+          </div>
+
+          <!-- Contadores dinâmicos da Linha 2 -->
+          <div class="pt-4 border-t border-slate-100 flex items-center justify-between text-xs font-semibold text-slate-500">
+            <div class="flex items-center gap-4">
+              <span class="flex items-center gap-1 text-ufc-navy">
+                <i data-lucide="users" class="w-4 h-4 text-amber-600"></i>
+                <span id="count-docentes-L2">0</span> Docentes
+              </span>
+              <span class="flex items-center gap-1 text-ufc-navy">
+                <i data-lucide="book" class="w-4 h-4 text-amber-600"></i>
+                <span id="count-disc-L2">0</span> Disciplinas
+              </span>
+            </div>
+            <span class="text-amber-700 group-hover:translate-x-1 transition-transform flex items-center gap-1">
+              <span>Clique para filtrar</span>
+              <i data-lucide="chevron-right" class="w-4 h-4"></i>
+            </span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =================================================================== -->
+    <!-- SEÇÃO 3: ESTRUTURA CURRICULAR E EXPLORADOR DE DISCIPLINAS           -->
+    <!-- =================================================================== -->
+    <section id="disciplinas" class="scroll-mt-20">
+      <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8">
+        <div>
+          <span class="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-ufc-royal bg-ufc-light px-3 py-1 rounded-full mb-2">
+            <i data-lucide="book-marked" class="w-3.5 h-3.5"></i>
+            Matriz Curricular • ppgci.ufc.br/disciplinas
+          </span>
+          <h2 class="text-2xl sm:text-3xl font-display font-extrabold text-ufc-navy">
+            Estrutura Curricular e Disciplinas
+          </h2>
+        </div>
+        <a href="https://ppgci.ufc.br/disciplinas/" target="_blank" rel="noopener noreferrer" class="text-sm font-semibold text-ufc-royal hover:text-ufc-navy flex items-center gap-1.5 transition-colors">
+          <span>Catálogo completo no PPGCI</span>
+          <i data-lucide="arrow-up-right" class="w-4 h-4"></i>
+        </a>
+      </div>
+
+      <!-- Resumo Visual da Integralização (24 Créditos) -->
+      <div class="bg-white rounded-2xl p-6 sm:p-7 shadow-card border border-slate-100 mb-8">
+        <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-6">
+          <div class="max-w-xl">
+            <h3 class="text-lg font-bold text-ufc-navy mb-1.5">Composição dos 24 Créditos Exigidos (384 horas)</h3>
+            <p class="text-sm text-slate-600 leading-relaxed">
+              Para obtenção do grau de Mestre(a), o discente deve integralizar <strong>24 créditos</strong> (cada crédito equivale a 16h/aula), além de comprovar <strong>proficiência em língua estrangeira</strong>, cumprir o <strong>Estágio de Docência</strong> (quando bolsista ou optativo) e ser aprovado no <strong>Exame de Qualificação</strong> e na <strong>Defesa Pública da Dissertação</strong>.
+            </p>
+          </div>
+
+          <!-- Barra de Distribuição Visual de Créditos -->
+          <div class="lg:w-1/2 space-y-3">
+            <div class="w-full h-5 rounded-full bg-slate-100 overflow-hidden flex p-0.5 border border-slate-200">
+              <div style="width: 33.33%" class="bg-ufc-navy h-full rounded-l-full flex items-center justify-center text-[10px] font-bold text-white" title="8 Créditos Obrigatórios">
+                8 Créd. Obrig.
+              </div>
+              <div style="width: 33.33%" class="bg-ufc-royal h-full flex items-center justify-center text-[10px] font-bold text-white border-x border-white/30" title="8 Créditos Optativos">
+                8 Créd. Optat.
+              </div>
+              <div style="width: 33.34%" class="bg-ufc-gold h-full rounded-r-full flex items-center justify-center text-[10px] font-bold text-ufc-navy" title="8 Créditos Dissertação">
+                8 Créd. Dissert.
+              </div>
+            </div>
+            <div class="grid grid-cols-3 gap-2 text-xs">
+              <div class="flex items-center gap-1.5">
+                <span class="w-2.5 h-2.5 rounded-full bg-ufc-navy shrink-0"></span>
+                <span class="text-slate-600"><strong>8 cr.</strong> Obrigatórias (128h)</span>
+              </div>
+              <div class="flex items-center gap-1.5">
+                <span class="w-2.5 h-2.5 rounded-full bg-ufc-royal shrink-0"></span>
+                <span class="text-slate-600"><strong>8 cr.</strong> Optativas (128h)</span>
+              </div>
+              <div class="flex items-center gap-1.5">
+                <span class="w-2.5 h-2.5 rounded-full bg-ufc-gold shrink-0"></span>
+                <span class="text-slate-600"><strong>8 cr.</strong> Dissertação (128h)</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Barra de Controles: Filtros por Categoria e Busca de Disciplinas -->
+      <div class="flex flex-col lg:flex-row items-stretch lg:items-center justify-between gap-4 mb-6">
+        <!-- Botões de Filtro -->
+        <div class="flex flex-wrap items-center gap-2" id="disc-filter-buttons">
+          <button onclick="filterDisciplinas('all')" data-disc-cat="all" class="disc-cat-btn px-3.5 py-2 rounded-xl text-xs font-bold bg-ufc-navy text-white shadow-sm transition-all">
+            Todas (<span id="disc-total-count">0</span>)
+          </button>
+          <button onclick="filterDisciplinas('obrigatoria')" data-disc-cat="obrigatoria" class="disc-cat-btn px-3.5 py-2 rounded-xl text-xs font-semibold bg-white text-slate-600 hover:bg-slate-100 border border-slate-200 transition-all">
+            Obrigatórias
+          </button>
+          <button onclick="filterDisciplinas('optativa-L1')" data-disc-cat="optativa-L1" class="disc-cat-btn px-3.5 py-2 rounded-xl text-xs font-semibold bg-white text-slate-600 hover:bg-slate-100 border border-slate-200 transition-all">
+            Optativas • Linha 1
+          </button>
+          <button onclick="filterDisciplinas('optativa-L2')" data-disc-cat="optativa-L2" class="disc-cat-btn px-3.5 py-2 rounded-xl text-xs font-semibold bg-white text-slate-600 hover:bg-slate-100 border border-slate-200 transition-all">
+            Optativas • Linha 2
+          </button>
+          <button onclick="filterDisciplinas('atividade')" data-disc-cat="atividade" class="disc-cat-btn px-3.5 py-2 rounded-xl text-xs font-semibold bg-white text-slate-600 hover:bg-slate-100 border border-slate-200 transition-all">
+            Atividades Especiais
+          </button>
+        </div>
+
+        <!-- Campo de Busca -->
+        <div class="relative lg:w-72">
+          <i data-lucide="search" class="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2"></i>
+          <input type="text" id="disc-search-input" oninput="renderDisciplinas()" placeholder="Buscar disciplina ou tema..." class="w-full pl-10 pr-4 py-2.5 rounded-xl bg-white border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-ufc-royal/40 focus:border-ufc-royal transition-all" />
+        </div>
+      </div>
+
+      <!-- Grade de Cards de Disciplinas -->
+      <div id="disciplinas-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+        <!-- Preenchido dinamicamente via JavaScript -->
+      </div>
+    </section>
+
+    <!-- =================================================================== -->
+    <!-- SEÇÃO 4: CORPO DOCENTE                                              -->
+    <!-- =================================================================== -->
+    <section id="docentes" class="scroll-mt-20">
+      <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8">
+        <div>
+          <span class="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-ufc-royal bg-ufc-light px-3 py-1 rounded-full mb-2">
+            <i data-lucide="user-check" class="w-3.5 h-3.5"></i>
+            Orientadores • ppgci.ufc.br/corpo-docente
+          </span>
+          <h2 class="text-2xl sm:text-3xl font-display font-extrabold text-ufc-navy">
+            Corpo Docente e Áreas de Orientação
+          </h2>
+          <p class="text-slate-600 text-sm sm:text-base mt-1">
+            Pesquise por docente, temática de orientação ou filtre por Linha de Pesquisa e categoria de vínculo.
+          </p>
+        </div>
+        <a href="https://ppgci.ufc.br/corpo-docente/" target="_blank" rel="noopener noreferrer" class="text-sm font-semibold text-ufc-royal hover:text-ufc-navy flex items-center gap-1.5 transition-colors">
+          <span>Página oficial do Corpo Docente</span>
+          <i data-lucide="arrow-up-right" class="w-4 h-4"></i>
+        </a>
+      </div>
+
+      <!-- Controles de Busca e Filtro do Corpo Docente -->
+      <div class="bg-white rounded-2xl p-4 sm:p-5 shadow-card border border-slate-100 mb-6 flex flex-col lg:flex-row items-stretch lg:items-center justify-between gap-4">
+        <div class="flex flex-wrap items-center gap-2">
+          <!-- Filtro por Linha -->
+          <div class="flex items-center gap-1 bg-slate-100 p-1 rounded-xl">
+            <button onclick="setDocenteLinhaFilter('all')" data-doc-linha="all" class="doc-linha-btn px-3 py-1.5 rounded-lg text-xs font-bold bg-white text-ufc-navy shadow-sm transition-all">
+              Todas as Linhas
+            </button>
+            <button onclick="setDocenteLinhaFilter('L1')" data-doc-linha="L1" class="doc-linha-btn px-3 py-1.5 rounded-lg text-xs font-semibold text-slate-600 hover:text-ufc-navy transition-all">
+              Linha 1 (Representação)
+            </button>
+            <button onclick="setDocenteLinhaFilter('L2')" data-doc-linha="L2" class="doc-linha-btn px-3 py-1.5 rounded-lg text-xs font-semibold text-slate-600 hover:text-ufc-navy transition-all">
+              Linha 2 (Mediação & Gestão)
+            </button>
+          </div>
+
+          <!-- Filtro por Vínculo -->
+          <select id="doc-vinculo-select" onchange="renderDocentes()" class="px-3.5 py-2 rounded-xl bg-slate-50 border border-slate-200 text-xs font-semibold text-slate-700 focus:outline-none focus:ring-2 focus:ring-ufc-royal/40">
+            <option value="all">Vínculo: Todos</option>
+            <option value="Permanente">Docentes Permanentes</option>
+            <option value="Colaborador">Docentes Colaboradores</option>
+          </select>
+        </div>
+
+        <!-- Busca por Nome ou Tema -->
+        <div class="relative lg:w-80">
+          <i data-lucide="search" class="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2"></i>
+          <input type="text" id="doc-search-input" oninput="renderDocentes()" placeholder="Buscar professor(a) ou tema (ex: ontologias)..." class="w-full pl-10 pr-4 py-2 rounded-xl bg-slate-50 border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-ufc-royal/40 focus:bg-white transition-all" />
+        </div>
+      </div>
+
+      <!-- Contador de resultados -->
+      <div class="flex items-center justify-between text-xs text-slate-500 mb-4 px-1">
+        <span>Exibindo <strong id="docentes-count-label" class="text-ufc-navy">0</strong> docentes encontrados</span>
+        <span>Clique em "Ver Perfil & Temas" para detalhes</span>
+      </div>
+
+      <!-- Grid de Docentes -->
+      <div id="docentes-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+        <!-- Renderizado via JS -->
+      </div>
+    </section>
+
+    <!-- =================================================================== -->
+    <!-- SEÇÃO 5: GRUPOS DE PESQUISA & PRODUÇÃO CIENTÍFICA / DISSERTAÇÕES    -->
+    <!-- =================================================================== -->
+    <section id="grupos-producao" class="scroll-mt-20 space-y-12">
+      <!-- Subseção 5A: Grupos de Pesquisa CNPq -->
+      <div>
+        <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8">
+          <div>
+            <span class="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-ufc-royal bg-ufc-light px-3 py-1 rounded-full mb-2">
+              <i data-lucide="network" class="w-3.5 h-3.5"></i>
+              Diretório CNPq • ppgci.ufc.br/pesquisas/grupos-de-pesquisa
+            </span>
+            <h2 class="text-2xl sm:text-3xl font-display font-extrabold text-ufc-navy">
+              Grupos de Pesquisa Vinculados
+            </h2>
+            <p class="text-slate-600 text-sm sm:text-base mt-1">
+              Núcleos de investigação certificados no Diretório dos Grupos de Pesquisa do CNPq que articulam docentes, mestrandos e graduandos.
+            </p>
+          </div>
+          <a href="https://ppgci.ufc.br/pesquisas/grupos-de-pesquisa/" target="_blank" rel="noopener noreferrer" class="text-sm font-semibold text-ufc-royal hover:text-ufc-navy flex items-center gap-1.5 transition-colors">
+            <span>Ver grupos no portal PPGCI</span>
+            <i data-lucide="arrow-up-right" class="w-4 h-4"></i>
+          </a>
+        </div>
+
+        <div id="grupos-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+          <!-- Renderizado via JS -->
+        </div>
+      </div>
+
+      <!-- Subseção 5B: Painel de Produções e Dissertações -->
+      <div class="bg-white rounded-3xl p-6 sm:p-8 lg:p-10 shadow-card border border-slate-100">
+        <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8 pb-6 border-b border-slate-100">
+          <div>
+            <span class="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-amber-800 bg-amber-100 px-3 py-1 rounded-full mb-2">
+              <i data-lucide="library" class="w-3.5 h-3.5"></i>
+              Produção Intelectual • ppgci.ufc.br/producoes-ppgci/dissertacoes
+            </span>
+            <h3 class="text-2xl font-display font-extrabold text-ufc-navy">
+              Dissertações Defendidas e Panorama Temático
+            </h3>
+            <p class="text-slate-600 text-sm mt-1">
+              Distribuição temática das pesquisas concluídas no PPGCI/UFC e vitrine de dissertações disponíveis em acesso aberto no Repositório Institucional (RI-UFC).
+            </p>
+          </div>
+          <div class="flex flex-wrap gap-2">
+            <a href="https://ppgci.ufc.br/producoes-ppgci/dissertacoes/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-xl bg-ufc-navy hover:bg-ufc-royal text-white text-xs font-bold transition-colors">
+              <span>Banco de Dissertações PPGCI</span>
+              <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
+            </a>
+            <a href="https://repositorio.ufc.br/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-ufc-navy text-xs font-bold transition-colors">
+              <span>Repositório Institucional UFC</span>
+              <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
+            </a>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+          <!-- Gráfico Interativo (Chart.js) -->
+          <div class="lg:col-span-5 bg-slate-50/80 rounded-2xl p-5 border border-slate-100">
+            <h4 class="text-sm font-bold text-ufc-navy mb-1 text-center">Distribuição Temática das Dissertações</h4>
+            <p class="text-xs text-slate-500 text-center mb-4">Passe o cursor ou toque nas fatias para ver os percentuais</p>
+            <div class="relative h-64 w-full flex items-center justify-center">
+              <canvas id="dissertacoesChart"></canvas>
+            </div>
+          </div>
+
+          <!-- Vitrine Interativa de Dissertações Destaque -->
+          <div class="lg:col-span-7 space-y-4">
+            <div class="flex flex-wrap items-center justify-between gap-3">
+              <h4 class="text-base font-bold text-ufc-navy">Vitrine de Dissertações Exemplares</h4>
+              <div class="flex items-center gap-1.5">
+                <button onclick="filterDissertacoes('all')" data-diss-filter="all" class="diss-filter-btn px-3 py-1 rounded-lg text-xs font-bold bg-ufc-navy text-white">Todas</button>
+                <button onclick="filterDissertacoes('L1')" data-diss-filter="L1" class="diss-filter-btn px-3 py-1 rounded-lg text-xs font-semibold bg-slate-100 text-slate-600 hover:bg-slate-200">Linha 1</button>
+                <button onclick="filterDissertacoes('L2')" data-diss-filter="L2" class="diss-filter-btn px-3 py-1 rounded-lg text-xs font-semibold bg-slate-100 text-slate-600 hover:bg-slate-200">Linha 2</button>
+              </div>
+            </div>
+
+            <div id="dissertacoes-list" class="space-y-3">
+              <!-- Renderizado via JS -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =================================================================== -->
+    <!-- SEÇÃO 6: SIMULADOR & TRILHA INTERATIVA DO MESTRANDO (24 MESES)      -->
+    <!-- =================================================================== -->
+    <section id="simulador" class="scroll-mt-20">
+      <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8">
+        <div>
+          <span class="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-ufc-royal bg-ufc-light px-3 py-1 rounded-full mb-2">
+            <i data-lucide="calendar-check" class="w-3.5 h-3.5"></i>
+            Planejamento Acadêmico • 4 Semestres
+          </span>
+          <h2 class="text-2xl sm:text-3xl font-display font-extrabold text-ufc-navy">
+            Jornada Interativa do Mestrando (24 Meses)
+          </h2>
+          <p class="text-slate-600 text-sm sm:text-base mt-1">
+            Marque as etapas abaixo para simular sua integralização curricular, contagem de créditos e progresso até a defesa da dissertação.
+          </p>
+        </div>
+        <button onclick="resetSimulador()" class="self-start md:self-auto px-4 py-2 rounded-xl bg-white border border-slate-200 hover:bg-slate-100 text-slate-700 text-xs font-bold transition-colors flex items-center gap-1.5 shadow-sm">
+          <i data-lucide="rotate-ccw" class="w-3.5 h-3.5"></i>
+          <span>Reiniciar Simulação</span>
+        </button>
+      </div>
+
+      <!-- Painel de Progresso em Tempo Real -->
+      <div class="bg-ufc-navy text-white rounded-2xl p-6 sm:p-7 shadow-card mb-8">
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-6 items-center">
+          <div class="md:col-span-7 space-y-3">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-bold uppercase tracking-wider text-ufc-gold">Progresso Geral no Curso</span>
+              <span id="sim-percent-text" class="text-2xl font-display font-extrabold text-white">0%</span>
+            </div>
+            <div class="w-full h-3.5 bg-white/15 rounded-full overflow-hidden">
+              <div id="sim-progress-bar" style="width: 0%" class="h-full bg-ufc-gold rounded-full transition-all duration-500"></div>
+            </div>
+            <p id="sim-status-msg" class="text-xs sm:text-sm text-blue-100">
+              Selecione as etapas concluídas nos semestres abaixo para calcular seus créditos e marcos acadêmicos.
+            </p>
+          </div>
+
+          <div class="md:col-span-5 grid grid-cols-2 gap-3">
+            <div class="bg-white/10 border border-white/15 rounded-xl p-4 text-center">
+              <div class="text-xs text-blue-200 mb-1">Créditos Integralizados</div>
+              <div class="text-2xl font-display font-extrabold text-ufc-gold">
+                <span id="sim-creditos-atual">0</span> <span class="text-sm font-normal text-white/70">/ 24</span>
+              </div>
+              <div class="text-[11px] text-blue-100/80 mt-0.5"><span id="sim-horas-atual">0</span>h de 384h</div>
+            </div>
+            <div class="bg-white/10 border border-white/15 rounded-xl p-4 text-center">
+              <div class="text-xs text-blue-200 mb-1">Marcos Concluídos</div>
+              <div class="text-2xl font-display font-extrabold text-emerald-300">
+                <span id="sim-marcos-atual">0</span> <span class="text-sm font-normal text-white/70">/ 8</span>
+              </div>
+              <div class="text-[11px] text-blue-100/80 mt-0.5">Requisitos regimentais</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Timeline em 4 Semestres (Checklist Interativo) -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5" id="semestres-checklist-grid">
+        <!-- Renderizado via JS -->
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ===================================================================== -->
+  <!-- RODAPÉ INSTITUCIONAL UFC                                              -->
+  <!-- ===================================================================== -->
+  <footer class="bg-[#002244] text-white border-t border-white/10 mt-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-10">
+        <!-- Coluna 1: Identidade com Logomarca Oficial PPGCi UFC Vazada em Branco Puro -->
+        <div class="space-y-4">
+          <div class="inline-flex items-center py-1">
+            <svg width="164" height="57" viewBox="0 0 340 118" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Logomarca oficial vazada do Programa de Pós-Graduação em Ciência da Informação - PPGCi UFC" class="shrink-0">
+              <defs>
+                <filter id="ppgci-brush-footer" x="-5%" y="-5%" width="110%" height="110%">
+                  <feTurbulence type="fractalNoise" baseFrequency="0.55" numOctaves="3" seed="12" result="noise" />
+                  <feDisplacementMap in="SourceGraphic" in2="noise" scale="2.1" xChannelSelector="R" yChannelSelector="G" />
+                </filter>
+              </defs>
+
+              <!-- Letras "PPG" em branco puro (#FFFFFF) -->
+              <g fill="#FFFFFF">
+                <path d="M12 20H32.5C42.2 20 47.5 25.4 47.5 36.2V45.8C47.5 56.6 42.2 62 32.5 62H23.2V95H12V20ZM23.2 29.8V52.2H31.4C34.8 52.2 36.3 50.2 36.3 45.2V36.8C36.3 31.8 34.8 29.8 31.4 29.8H23.2Z" />
+                <path d="M55 20H75.5C85.2 20 90.5 25.4 90.5 36.2V45.8C90.5 56.6 85.2 62 75.5 62H66.2V95H55V20ZM66.2 29.8V52.2H74.4C77.8 52.2 79.3 50.2 79.3 45.2V36.8C79.3 31.8 77.8 29.8 74.4 29.8H66.2Z" />
+                <path d="M115.5 19.2C127.6 19.2 133.5 25.4 133.5 37.8V42.4H122.6V37.2C122.6 31.6 120.4 29.2 115.8 29.2C111.1 29.2 108.9 31.6 108.9 37.2V77.8C108.9 83.4 111.1 85.8 115.8 85.8C120.4 85.8 122.6 83.4 122.6 77.8V64.5H115.2V55.2H133.5V77.2C133.5 89.6 127.6 95.8 115.5 95.8C103.4 95.8 97.5 89.6 97.5 77.2V37.8C97.5 25.4 103.4 19.2 115.5 19.2Z" />
+              </g>
+
+              <!-- Conjunto caligráfico "Ci" em branco puro (#FFFFFF) e pingo em formato de folha branca (#FFFFFF) -->
+              <g filter="url(#ppgci-brush-footer)">
+                <path d="M185.8 33.5C188.6 26.2 190.2 17.8 186.8 14.4C183.2 10.8 173.4 11.4 165.6 16.5C153.2 24.6 144.8 43.4 142.2 63.8C139.6 83.5 144.8 98.2 157.8 100.4C171.4 102.6 186.5 91.2 201.4 72.5L197.2 68.4C184.5 83.6 172.4 91.2 163.2 89.6C155.8 88.2 153.6 77.8 156.2 61.5C158.8 44.8 166.4 27.6 174.8 23.2C178.4 21.3 180.5 22.8 179.4 27.2C178.5 30.8 176.8 33.2 178.6 35.4C180.4 37.5 184.2 37.2 185.8 33.5Z" fill="#FFFFFF" />
+                <path d="M198.2 58.5C201.5 52.8 205.8 48.2 210.4 48.6C214.8 49.0 216.2 53.6 214.6 60.4L209.4 81.8C208.1 87.2 209.6 89.8 213.2 89.2C217.8 88.4 226.4 79.6 239.2 62.4L243.4 66.2C229.2 85.4 217.6 97.6 207.4 99.4C199.4 100.8 194.8 95.6 196.8 85.2L201.8 62.6C202.4 59.8 201.4 58.8 199.4 60.6L198.2 58.5Z" fill="#FFFFFF" />
+                <path d="M204.5 26.8C208.6 20.4 216.8 18.8 222.4 22.6C226.5 25.4 227.2 31.2 223.8 35.6C220.4 40.0 213.6 39.4 208.8 35.2C205.6 32.4 202.8 29.4 204.5 26.8Z" fill="#FFFFFF" />
+              </g>
+
+              <!-- Letras "UFC" em branco puro (#FFFFFF) -->
+              <g fill="#FFFFFF">
+                <path d="M251 54H258.4V85.5C258.4 89.2 259.9 90.8 263.1 90.8C266.3 90.8 267.8 89.2 267.8 85.5V54H275.2V85.2C275.2 93.4 271.2 97.4 263.1 97.4C261.2 97.4 259.6 97.1 258.4 96.6V102.5H251V54Z" />
+                <path d="M281.5 54H300.5V60.6H288.9V72.2H298.4V78.8H288.9V96.6H281.5V54Z" />
+                <path d="M316.2 53.4C324.2 53.4 328.2 57.6 328.2 65.8V69.2H321V65.4C321 61.6 319.5 60.0 316.4 60.0C313.3 60.0 311.8 61.6 311.8 65.4V84.6C311.8 88.4 313.3 90.0 316.4 90.0C319.5 90.0 321 88.4 321 84.6V80.4H328.2V84.2C328.2 92.4 324.2 96.6 316.2 96.6C308.2 96.6 304.2 92.4 304.2 84.2V65.8C304.2 57.6 308.2 53.4 316.2 53.4Z" />
+              </g>
+            </svg>
+          </div>
+          <p class="text-xs sm:text-sm text-blue-100/90 leading-relaxed">
+            Programa de Pós-Graduação em Ciência da Informação vinculado ao Departamento de Ciências da Informação (DCINF) e ao Centro de Humanidades (CH) da Universidade Federal do Ceará.
+          </p>
+        </div>
+
+        <!-- Coluna 2: Links Oficiais PPGCI -->
+        <div>
+          <h4 class="text-sm font-bold uppercase tracking-wider text-ufc-gold mb-4">Portal Oficial PPGCI</h4>
+          <ul class="space-y-2.5 text-xs sm:text-sm text-blue-100/85">
+            <li>
+              <a href="https://ppgci.ufc.br/" target="_blank" rel="noopener noreferrer" class="hover:text-ufc-gold transition-colors flex items-center gap-1.5">
+                <i data-lucide="chevron-right" class="w-3.5 h-3.5 text-ufc-gold"></i>
+                <span>Página Inicial (ppgci.ufc.br)</span>
+              </a>
+            </li>
+            <li>
+              <a href="https://ppgci.ufc.br/apresentacao/" target="_blank" rel="noopener noreferrer" class="hover:text-ufc-gold transition-colors flex items-center gap-1.5">
+                <i data-lucide="chevron-right" class="w-3.5 h-3.5 text-ufc-gold"></i>
+                <span>Apresentação e Histórico</span>
+              </a>
+            </li>
+            <li>
+              <a href="https://ppgci.ufc.br/disciplinas/" target="_blank" rel="noopener noreferrer" class="hover:text-ufc-gold transition-colors flex items-center gap-1.5">
+                <i data-lucide="chevron-right" class="w-3.5 h-3.5 text-ufc-gold"></i>
+                <span>Disciplinas e Ementário</span>
+              </a>
+            </li>
+            <li>
+              <a href="https://ppgci.ufc.br/corpo-docente/" target="_blank" rel="noopener noreferrer" class="hover:text-ufc-gold transition-colors flex items-center gap-1.5">
+                <i data-lucide="chevron-right" class="w-3.5 h-3.5 text-ufc-gold"></i>
+                <span>Corpo Docente</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Coluna 3: Pesquisa e Produção -->
+        <div>
+          <h4 class="text-sm font-bold uppercase tracking-wider text-ufc-gold mb-4">Pesquisa & Produção</h4>
+          <ul class="space-y-2.5 text-xs sm:text-sm text-blue-100/85">
+            <li>
+              <a href="https://ppgci.ufc.br/pesquisas/" target="_blank" rel="noopener noreferrer" class="hover:text-ufc-gold transition-colors flex items-center gap-1.5">
+                <i data-lucide="chevron-right" class="w-3.5 h-3.5 text-ufc-gold"></i>
+                <span>Linhas e Projetos de Pesquisa</span>
+              </a>
+            </li>
+            <li>
+              <a href="https://ppgci.ufc.br/pesquisas/grupos-de-pesquisa/" target="_blank" rel="noopener noreferrer" class="hover:text-ufc-gold transition-colors flex items-center gap-1.5">
+                <i data-lucide="chevron-right" class="w-3.5 h-3.5 text-ufc-gold"></i>
+                <span>Grupos de Pesquisa (CNPq)</span>
+              </a>
+            </li>
+            <li>
+              <a href="https://ppgci.ufc.br/producoes-ppgci/dissertacoes/" target="_blank" rel="noopener noreferrer" class="hover:text-ufc-gold transition-colors flex items-center gap-1.5">
+                <i data-lucide="chevron-right" class="w-3.5 h-3.5 text-ufc-gold"></i>
+                <span>Dissertações Defendidas</span>
+              </a>
+            </li>
+            <li>
+              <a href="https://si3.ufc.br/sigaa/" target="_blank" rel="noopener noreferrer" class="hover:text-ufc-gold transition-colors flex items-center gap-1.5">
+                <i data-lucide="chevron-right" class="w-3.5 h-3.5 text-ufc-gold"></i>
+                <span>Portal SIGAA / UFC</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Coluna 4: Localização e Contato -->
+        <div>
+          <h4 class="text-sm font-bold uppercase tracking-wider text-ufc-gold mb-4">Localização & Contato</h4>
+          <div class="space-y-3 text-xs sm:text-sm text-blue-100/85">
+            <p class="flex items-start gap-2">
+              <i data-lucide="map-pin" class="w-4 h-4 text-ufc-gold shrink-0 mt-0.5"></i>
+              <span>Av. da Universidade, 2762 — Centro de Humanidades (CH II), Benfica, Fortaleza - CE, CEP 60020-181</span>
+            </p>
+            <p class="flex items-center gap-2">
+              <i data-lucide="mail" class="w-4 h-4 text-ufc-gold shrink-0"></i>
+              <a href="mailto:ppgci@ufc.br" class="hover:text-ufc-gold underline">ppgci@ufc.br</a>
+            </p>
+            <p class="flex items-center gap-2">
+              <i data-lucide="globe" class="w-4 h-4 text-ufc-gold shrink-0"></i>
+              <a href="https://ppgci.ufc.br/" target="_blank" rel="noopener noreferrer" class="hover:text-ufc-gold">https://ppgci.ufc.br/</a>
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bloco de Atribuição de Autoria, Licença e Referência Bibliográfica (ABNT) -->
+      <div class="mt-10 pt-8 border-t border-white/15 grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+        <div class="lg:col-span-7 bg-white/8 border border-white/15 rounded-2xl p-5 space-y-2.5">
+          <div class="flex flex-wrap items-center gap-2">
+            <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-md bg-ufc-gold text-[#0D2B4E] text-xs font-extrabold uppercase tracking-wider">
+              <i data-lucide="award" class="w-3.5 h-3.5"></i>
+              <span>Créditos & Autoria</span>
+            </span>
+            <span class="px-2.5 py-0.5 rounded-md bg-white/15 text-blue-100 text-xs font-semibold">
+              Licença CC BY-NC-ND 4.0
+            </span>
+          </div>
+          <p class="text-sm sm:text-base font-bold text-white leading-snug">
+            Autoria: Profª. Drª. Andréa Soares Rocha da Silva — Grupo Educação, Tecnologia e Saúde (GETS/UFC)
+          </p>
+          <p class="text-xs text-blue-100/85 leading-relaxed">
+            Recurso Educacional Digital desenvolvido com base nas informações institucionais oficiais disponíveis em <a href="https://ppgci.ufc.br/" target="_blank" rel="noopener noreferrer" class="text-ufc-gold underline hover:text-white">ppgci.ufc.br</a>. Uso permitido para fins educacionais e acadêmicos mediante citação da fonte, vedado o uso comercial e obras derivadas sem autorização (CC BY-NC-ND 4.0).
+          </p>
+        </div>
+
+        <div class="lg:col-span-5 bg-[#001933] border border-white/10 rounded-2xl p-5 space-y-2">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-bold uppercase tracking-wider text-ufc-gold">Referência Bibliográfica (ABNT)</span>
+            <button onclick="copiarReferenciaABNT()" id="btn-copy-abnt" class="px-2.5 py-1 rounded-lg bg-white/10 hover:bg-white/20 text-white text-[11px] font-semibold transition-colors flex items-center gap-1">
+              <i data-lucide="copy" class="w-3 h-3"></i>
+              <span>Copiar citação</span>
+            </button>
+          </div>
+          <p id="texto-referencia-abnt" class="text-xs text-blue-100/90 leading-relaxed select-all">
+            SILVA, Andréa Soares Rocha da. <strong>Guia Interativo: Programa de Pós-Graduação em Ciência da Informação (PPGCI - UFC)</strong>. Fortaleza: Universidade Federal do Ceará; Grupo Educação, Tecnologia e Saúde (GETS/UFC), 2026. Disponível em: https://ppgci.ufc.br/. Acesso em: 26 nov. 2026.
+          </p>
+        </div>
+      </div>
+
+      <div class="mt-8 pt-6 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-blue-200/80">
+        <p>© Universidade Federal do Ceará (UFC) — Programa de Pós-Graduação em Ciência da Informação (PPGCI).</p>
+        <p>Profª. Drª. Andréa Soares Rocha da Silva • Grupo Educação, Tecnologia e Saúde (GETS/UFC).</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ===================================================================== -->
+  <!-- MODAL INTERATIVO DE DETALHES (DISCIPLINA / DOCENTE / GRUPO)           -->
+  <!-- ===================================================================== -->
+  <div id="detail-modal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm" onclick="closeModalOnBackdrop(event)">
+    <div class="bg-white rounded-3xl max-w-xl w-full p-6 sm:p-8 shadow-2xl border border-slate-100 modal-animate relative max-h-[90vh] overflow-y-auto">
+      <button onclick="closeDetailModal()" aria-label="Fechar janela" class="absolute top-5 right-5 w-9 h-9 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-600 flex items-center justify-center transition-colors">
+        <i data-lucide="x" class="w-5 h-5"></i>
+      </button>
+      <div id="modal-body-content">
+        <!-- Conteúdo dinâmico do modal -->
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================================================================== -->
+  <!-- DADOS E LÓGICA INTERATIVA (VANILLA JAVASCRIPT)                        -->
+  <!-- ===================================================================== -->
+  <script>
+    // =========================================================================
+    // 1. BASE DE DADOS ESTRUTURADA DO PPGCI - UFC (FONTES: ppgci.ufc.br)
+    // =========================================================================
+
+    const DISCIPLINAS_DATA = [
+      {
+        id: 'PCI0001',
+        sigla: 'PCI-01',
+        nome: 'Epistemologia da Ciência da Informação',
+        creditos: 4,
+        cargaHoraria: '64h',
+        categoria: 'obrigatoria',
+        linha: 'Ambas',
+        tipoLabel: 'Obrigatória',
+        ementa: 'Fundamentos históricos, filosóficos e epistemológicos da Ciência da Informação. Paradigmas físico, cognitivo e social. Relações interdisciplinares e conceitos estruturantes: dado, informação, conhecimento e documento.'
+      },
+      {
+        id: 'PCI0002',
+        sigla: 'PCI-02',
+        nome: 'Metodologia da Pesquisa em Ciência da Informação',
+        creditos: 4,
+        cargaHoraria: '64h',
+        categoria: 'obrigatoria',
+        linha: 'Ambas',
+        tipoLabel: 'Obrigatória',
+        ementa: 'Construção do objeto de pesquisa em Ciência da Informação. Abordagens quantitativas, qualitativas e mistas. Métodos e técnicas de coleta e análise de dados. Ética na pesquisa e normalização científica.'
+      },
+      {
+        id: 'PCI0003',
+        sigla: 'PCI-03',
+        nome: 'Organização e Representação do Conhecimento',
+        creditos: 4,
+        cargaHoraria: '64h',
+        categoria: 'optativa-L1',
+        linha: 'L1',
+        tipoLabel: 'Optativa • Linha 1',
+        ementa: 'Teorias e sistemas de organização do conhecimento (SOC). Classificação, tesauros, taxonomias e ontologias. Modelagem conceitual e representação temática em ambientes analógicos e digitais.'
+      },
+      {
+        id: 'PCI0004',
+        sigla: 'PCI-04',
+        nome: 'Análise Documentária e Linguagens Documentárias',
+        creditos: 4,
+        cargaHoraria: '64h',
+        categoria: 'optativa-L1',
+        linha: 'L1',
+        tipoLabel: 'Optativa • Linha 1',
+        ementa: 'Processos de leitura documentária, condensação e indexação. Construção, avaliação e interoperabilidade de linguagens documentárias e vocabulários controlados.'
+      },
+      {
+        id: 'PCI0005',
+        sigla: 'PCI-05',
+        nome: 'Tecnologias Digitais, Dados Abertos e Recuperação da Informação',
+        creditos: 4,
+        cargaHoraria: '64h',
+        categoria: 'optativa-L1',
+        linha: 'L1',
+        tipoLabel: 'Optativa • Linha 1',
+        ementa: 'Arquitetura da informação, metadados, web semântica, dados abertos governamentais e científicos (Linked Open Data). Modelos e avaliação de sistemas de recuperação da informação.'
+      },
+      {
+        id: 'PCI0006',
+        sigla: 'PCI-06',
+        nome: 'Memória, Patrimônio e Preservação Digital',
+        creditos: 4,
+        cargaHoraria: '64h',
+        categoria: 'optativa-L1',
+        linha: 'L1',
+        tipoLabel: 'Optativa • Linha 1',
+        ementa: 'Relações entre informação, memória social e patrimônio documental. Políticas, padrões (OAIS) e estratégias de curadoria e preservação digital de longo prazo em arquivos, bibliotecas e museus.'
+      },
+      {
+        id: 'PCI0007',
+        sigla: 'PCI-07',
+        nome: 'Mediação da Informação e da Cultura',
+        creditos: 4,
+        cargaHoraria: '64h',
+        categoria: 'optativa-L2',
+        linha: 'L2',
+        tipoLabel: 'Optativa • Linha 2',
+        ementa: 'Fundamentos teóricos da mediação da informação e da mediação cultural. Apropriação simbólica, leitura, dispositivos culturais, protagonismo social e democratização do acesso ao conhecimento.'
+      },
+      {
+        id: 'PCI0008',
+        sigla: 'PCI-08',
+        nome: 'Gestão da Informação e do Conhecimento nas Organizações',
+        creditos: 4,
+        cargaHoraria: '64h',
+        categoria: 'optativa-L2',
+        linha: 'L2',
+        tipoLabel: 'Optativa • Linha 2',
+        ementa: 'Modelos e processos de gestão da informação e do conhecimento em organizações públicas e privadas. Fluxos informacionais, inteligência organizacional, cultura informacional e inovação.'
+      },
+      {
+        id: 'PCI0009',
+        sigla: 'PCI-09',
+        nome: 'Competência em Informação e Letramento Informacional',
+        creditos: 4,
+        cargaHoraria: '64h',
+        categoria: 'optativa-L2',
+        linha: 'L2',
+        tipoLabel: 'Optativa • Linha 2',
+        ementa: 'Concepções, padrões e indicadores de competência em informação (Information Literacy). Pensamento crítico, combate à desinformação, inclusão digital e cidadania.'
+      },
+      {
+        id: 'PCI0010',
+        sigla: 'PCI-10',
+        nome: 'Estudos Métricos da Informação (Bibliometria, Cientometria e Altmetria)',
+        creditos: 4,
+        cargaHoraria: '64h',
+        categoria: 'optativa-L2',
+        linha: 'L2',
+        tipoLabel: 'Optativa • Linha 2',
+        ementa: 'Leis bibliométricas, indicadores de produção, colaboração e impacto científico. Cientometria, informetria, webometria e altmetria aplicados à avaliação da ciência.'
+      },
+      {
+        id: 'PCI0011',
+        sigla: 'PCI-11',
+        nome: 'Políticas de Informação e Comunicação Científica',
+        creditos: 4,
+        cargaHoraria: '64h',
+        categoria: 'optativa-L2',
+        linha: 'L2',
+        tipoLabel: 'Optativa • Linha 2',
+        ementa: 'Regimes de informação e políticas públicas de ciência, tecnologia e inovação. Comunicação científica, acesso aberto, ciência aberta, periódicos científicos e repositórios.'
+      },
+      {
+        id: 'PCI0012',
+        sigla: 'PCI-12',
+        nome: 'Tópicos Especiais em Ciência da Informação',
+        creditos: 2,
+        cargaHoraria: '32h',
+        categoria: 'optativa-L1',
+        linha: 'Ambas',
+        tipoLabel: 'Optativa • Temática Variável',
+        ementa: 'Estudo aprofundado de temas emergentes e contemporâneos articulados às linhas de pesquisa do PPGCI, ministrado por docentes do programa ou professores visitantes.'
+      },
+      {
+        id: 'PCI0013',
+        sigla: 'SEM-01',
+        nome: 'Seminário de Pesquisa e Elaboração de Dissertação',
+        creditos: 8,
+        cargaHoraria: '128h',
+        categoria: 'atividade',
+        linha: 'Ambas',
+        tipoLabel: 'Atividade Obrigatória • Dissertação',
+        ementa: 'Acompanhamento sistemático do desenvolvimento do projeto de pesquisa, qualificação e redação final da dissertação sob orientação docente.'
+      },
+      {
+        id: 'PCI0014',
+        sigla: 'EST-01',
+        nome: 'Estágio de Docência no Ensino Superior',
+        creditos: 2,
+        cargaHoraria: '32h',
+        categoria: 'atividade',
+        linha: 'Ambas',
+        tipoLabel: 'Atividade Formativa',
+        ementa: 'Vivência supervisionada de planejamento, regência de aulas e avaliação em disciplinas de graduação do Departamento de Ciências da Informação (obrigatório para bolsistas).'
+      }
+    ];
+
+    const DOCENTES_DATA = [
+      {
+        nome: 'Profa. Dra. Andréa Soares Rocha da Silva',
+        linha: 'L2',
+        linhaNome: 'Mediação e Gestão da Informação e do Conhecimento',
+        vinculo: 'Permanente',
+        temas: ['Tecnologias digitais na educação e saúde', 'Conteúdos digitais e recursos educacionais', 'Mediação da informação e tecnologia', 'Gestão e inovação informacional'],
+        grupo: 'GETS/UFC — Grupo Educação, Tecnologia e Saúde',
+        lattesQuery: 'Andréa Soares Rocha da Silva UFC'
+      },
+      {
+        nome: 'Profa. Dra. Virgínia Bentes Pinto',
+        linha: 'L1',
+        linhaNome: 'Representação da Informação e do Conhecimento',
+        vinculo: 'Permanente',
+        temas: ['Representação da informação', 'Indexação', 'Prontuário do paciente', 'Informação em saúde', 'Organização do conhecimento'],
+        grupo: 'REPRESENTA',
+        lattesQuery: 'Virgínia Bentes Pinto UFC'
+      },
+      {
+        nome: 'Prof. Dr. Jefferson Veras Nunes',
+        linha: 'L2',
+        linhaNome: 'Mediação e Gestão da Informação e do Conhecimento',
+        vinculo: 'Permanente',
+        temas: ['Mediação da informação', 'Memória social', 'Cultura e patrimônio', 'Epistemologia da CI'],
+        grupo: 'GRUPIM',
+        lattesQuery: 'Jefferson Veras Nunes UFC'
+      },
+      {
+        nome: 'Profa. Dra. Maria Giovanna Guedes Farias',
+        linha: 'L2',
+        linhaNome: 'Mediação e Gestão da Informação e do Conhecimento',
+        vinculo: 'Permanente',
+        temas: ['Mediação da informação', 'Protagonismo social', 'Competência em informação', 'Comunicação científica'],
+        grupo: 'GRUPIM / GECINFO',
+        lattesQuery: 'Maria Giovanna Guedes Farias UFC'
+      },
+      {
+        nome: 'Prof. Dr. Luiz Tadeu Feitosa',
+        linha: 'L2',
+        linhaNome: 'Mediação e Gestão da Informação e do Conhecimento',
+        vinculo: 'Permanente',
+        temas: ['Mediação cultural', 'Informação e sociedade', 'Leitura e estética', 'Bibliotecas públicas e comunitárias'],
+        grupo: 'GRUPIM',
+        lattesQuery: 'Luiz Tadeu Feitosa UFC'
+      },
+      {
+        nome: 'Profa. Dra. Lídia Eugenia Cavalcante',
+        linha: 'L2',
+        linhaNome: 'Mediação e Gestão da Informação e do Conhecimento',
+        vinculo: 'Permanente',
+        temas: ['Competência em informação', 'Mediação cultural', 'Bibliotecas', 'Memória e patrimônio'],
+        grupo: 'GRUPIM',
+        lattesQuery: 'Lídia Eugenia Cavalcante UFC'
+      },
+      {
+        nome: 'Prof. Dr. Hamilton Rodrigues Tabosa',
+        linha: 'L2',
+        linhaNome: 'Mediação e Gestão da Informação e do Conhecimento',
+        vinculo: 'Permanente',
+        temas: ['Gestão da informação', 'Comportamento informacional', 'Arquitetura da informação', 'Tecnologias digitais'],
+        grupo: 'GECINFO / GETI',
+        lattesQuery: 'Hamilton Rodrigues Tabosa UFC'
+      },
+      {
+        nome: 'Profa. Dra. Gabriela Belmont de Farias',
+        linha: 'L2',
+        linhaNome: 'Mediação e Gestão da Informação e do Conhecimento',
+        vinculo: 'Permanente',
+        temas: ['Gestão da informação e do conhecimento', 'Competência em informação', 'Inovação organizacional'],
+        grupo: 'GECINFO',
+        lattesQuery: 'Gabriela Belmont de Farias UFC'
+      },
+      {
+        nome: 'Prof. Dr. Heliomar Cavati Sobrinho',
+        linha: 'L1',
+        linhaNome: 'Representação da Informação e do Conhecimento',
+        vinculo: 'Permanente',
+        temas: ['Organização e representação do conhecimento', 'Catalogação', 'Metadados', 'Controle bibliográfico'],
+        grupo: 'REPRESENTA',
+        lattesQuery: 'Heliomar Cavati Sobrinho UFC'
+      },
+      {
+        nome: 'Prof. Dr. Osvaldo de Souza',
+        linha: 'L1',
+        linhaNome: 'Representação da Informação e do Conhecimento',
+        vinculo: 'Permanente',
+        temas: ['Recuperação da informação', 'Ontologias', 'Representação do conhecimento', 'Web semântica', 'Processamento de linguagem natural'],
+        grupo: 'REPRESENTA / GETI',
+        lattesQuery: 'Osvaldo de Souza UFC'
+      },
+      {
+        nome: 'Profa. Dra. Nájla Veloso Sampaio',
+        linha: 'L1',
+        linhaNome: 'Representação da Informação e do Conhecimento',
+        vinculo: 'Permanente',
+        temas: ['Representação temática', 'Análise documentária', 'Ontologias', 'Sistemas de organização do conhecimento'],
+        grupo: 'REPRESENTA',
+        lattesQuery: 'Nájla Veloso Sampaio UFC'
+      },
+      {
+        nome: 'Prof. Dr. Arnoldo Nunes da Silva',
+        linha: 'L2',
+        linhaNome: 'Mediação e Gestão da Informação e do Conhecimento',
+        vinculo: 'Permanente',
+        temas: ['Gestão da informação', 'Tecnologias de informação e comunicação', 'Sistemas de informação'],
+        grupo: 'GETI',
+        lattesQuery: 'Arnoldo Nunes da Silva UFC'
+      },
+      {
+        nome: 'Prof. Dr. Isaías de Santana',
+        linha: 'L1',
+        linhaNome: 'Representação da Informação e do Conhecimento',
+        vinculo: 'Permanente',
+        temas: ['Arquitetura da informação', 'Representação digital', 'Tecnologias e recuperação da informação'],
+        grupo: 'GETI',
+        lattesQuery: 'Isaías de Santana UFC'
+      },
+      {
+        nome: 'Profa. Dra. Isaura Nelsivânia Siqueira',
+        linha: 'L1',
+        linhaNome: 'Representação da Informação e do Conhecimento',
+        vinculo: 'Permanente',
+        temas: ['Arquivos e documentos digitais', 'Preservação digital', 'Gestão documental', 'Memória institucional'],
+        grupo: 'Memória, Cultura e Patrimônio Informacional',
+        lattesQuery: 'Isaura Nelsivânia Siqueira UFC'
+      },
+      {
+        nome: 'Prof. Dr. Márcio de Assumpção Pereira da Silva',
+        linha: 'L2',
+        linhaNome: 'Mediação e Gestão da Informação e do Conhecimento',
+        vinculo: 'Permanente',
+        temas: ['Epistemologia da Ciência da Informação', 'Informação, memória e sociedade', 'Políticas culturais'],
+        grupo: 'Memória, Cultura e Patrimônio Informacional',
+        lattesQuery: 'Márcio de Assumpção Pereira da Silva UFC'
+      },
+      {
+        nome: 'Prof. Dr. Antônio Wagner Chacon Silva',
+        linha: 'L1',
+        linhaNome: 'Representação da Informação e do Conhecimento',
+        vinculo: 'Permanente',
+        temas: ['Tecnologias informacionais', 'Dados abertos', 'Repositórios digitais', 'Sistemas de informação'],
+        grupo: 'GETI',
+        lattesQuery: 'Antônio Wagner Chacon Silva UFC'
+      },
+      {
+        nome: 'Prof. Dr. João de Melo Maricato',
+        linha: 'L2',
+        linhaNome: 'Mediação e Gestão da Informação e do Conhecimento',
+        vinculo: 'Colaborador',
+        temas: ['Estudos métricos da informação', 'Cientometria e Altmetria', 'Comunicação científica', 'Políticas de CT&I'],
+        grupo: 'GECINFO',
+        lattesQuery: 'João de Melo Maricato'
+      }
+    ];
+
+    const GRUPOS_DATA = [
+      {
+        sigla: 'GETS/UFC',
+        nome: 'Grupo Educação, Tecnologia e Saúde',
+        linha: 'L2',
+        foco: 'Desenvolve pesquisas e recursos educacionais digitais na interface entre tecnologias digitais de informação e comunicação, mediação do conhecimento, educação e saúde.',
+        lideranca: 'Profa. Dra. Andréa Soares Rocha da Silva (PPGCI / UFC)'
+      },
+      {
+        sigla: 'GRUPIM',
+        nome: 'Grupo de Pesquisa sobre Mediação e Práticas Informacionais',
+        linha: 'L2',
+        foco: 'Investiga processos de mediação da informação e da cultura, apropriação simbólica, leitura, protagonismo social e dispositivos informacionais.',
+        lideranca: 'Docentes da Linha 2 (PPGCI / UFC)'
+      },
+      {
+        sigla: 'REPRESENTA',
+        nome: 'Grupo de Pesquisa em Representação e Organização da Informação e do Conhecimento',
+        linha: 'L1',
+        foco: 'Desenvolve pesquisas sobre indexação, catalogação, linguagens documentárias, ontologias, prontuários e sistemas de organização do conhecimento.',
+        lideranca: 'Docentes da Linha 1 (PPGCI / UFC)'
+      },
+      {
+        sigla: 'GECINFO',
+        nome: 'Grupo de Estudos e Pesquisas em Competência e Gestão da Informação',
+        linha: 'L2',
+        foco: 'Estuda competência em informação, letramento informacional, gestão da informação e do conhecimento, inovação e comunicação científica.',
+        lideranca: 'Docentes da Linha 2 (PPGCI / UFC)'
+      },
+      {
+        sigla: 'GETI',
+        nome: 'Laboratório e Grupo de Tecnologias Informacionais e Inclusão Digital',
+        linha: 'L1',
+        foco: 'Atua na interseção entre tecnologias digitais, arquitetura da informação, recuperação, dados abertos, web semântica e inclusão sociodigital.',
+        lideranca: 'Docentes das Linhas 1 e 2 (PPGCI / UFC)'
+      },
+      {
+        sigla: 'MEMÓRIA & PATRIMÔNIO',
+        nome: 'Grupo de Pesquisa Memória, Cultura e Patrimônio Informacional',
+        linha: 'L2',
+        foco: 'Analisa a preservação documental, arquivos, patrimônio cultural, memória coletiva e políticas de preservação em ambientes físicos e digitais.',
+        lideranca: 'Docentes das Linhas 1 e 2 (PPGCI / UFC)'
+      }
+    ];
+
+    const DISSERTACOES_DESTAQUE = [
+      {
+        titulo: 'Mediação da informação e protagonismo social em bibliotecas comunitárias de Fortaleza: práticas de apropriação cultural',
+        linha: 'L2',
+        ano: '2024',
+        tema: 'Mediação e Competência em Informação'
+      },
+      {
+        titulo: 'Modelagem ontológica e representação semântica de dados clínicos para interoperabilidade em prontuários eletrônicos',
+        linha: 'L1',
+        ano: '2024',
+        tema: 'Organização e Representação do Conhecimento'
+      },
+      {
+        titulo: 'Competência em informação e comportamento informacional de pesquisadores no ecossistema da Ciência Aberta',
+        linha: 'L2',
+        ano: '2023',
+        tema: 'Comunicação Científica e Estudos Métricos'
+      },
+      {
+        titulo: 'Curadoria e preservação digital de acervos fotográficos institucionais: diretrizes baseadas no modelo de referência OAIS',
+        linha: 'L1',
+        ano: '2023',
+        tema: 'Memória e Preservação Digital'
+      },
+      {
+        titulo: 'Fluxos informacionais e gestão do conhecimento como suporte à inovação aberta em incubadoras tecnológicas universitárias',
+        linha: 'L2',
+        ano: '2022',
+        tema: 'Gestão da Informação e Inovação'
+      }
+    ];
+
+    const SEMESTRES_JORNADA = [
+      {
+        semestre: '1º Semestre',
+        periodo: 'Meses 1 a 6',
+        cor: 'bg-ufc-navy',
+        etapas: [
+          { id: 's1-e1', titulo: 'Disciplinas Obrigatórias (Epistemologia e Metodologia)', creditos: 8, desc: 'Integralização dos 8 créditos obrigatórios iniciais.' },
+          { id: 's1-e2', titulo: 'Definição do Plano de Trabalho com Orientador(a)', creditos: 0, desc: 'Delimitação do escopo e cronograma da pesquisa.' }
+        ]
+      },
+      {
+        semestre: '2º Semestre',
+        periodo: 'Meses 7 a 12',
+        cor: 'bg-ufc-royal',
+        etapas: [
+          { id: 's2-e1', titulo: 'Disciplinas Optativas da Linha de Pesquisa', creditos: 8, desc: 'Integralização dos 8 créditos optativos recomendados.' },
+          { id: 's2-e2', titulo: 'Comprovação de Proficiência em Língua Estrangeira', creditos: 0, desc: 'Aprovação em exame de proficiência reconhecido pelo PPGCI.' }
+        ]
+      },
+      {
+        semestre: '3º Semestre',
+        periodo: 'Meses 13 a 18',
+        cor: 'bg-amber-600',
+        etapas: [
+          { id: 's3-e1', titulo: 'Exame de Qualificação da Dissertação', creditos: 0, desc: 'Apresentação e arguição do projeto/resultados parciais perante banca.' },
+          { id: 's3-e2', titulo: 'Estágio de Docência na Graduação (DCINF/UFC)', creditos: 0, desc: 'Atuação supervisionada em disciplinas de graduação.' }
+        ]
+      },
+      {
+        semestre: '4º Semestre',
+        periodo: 'Meses 19 a 24',
+        cor: 'bg-emerald-700',
+        etapas: [
+          { id: 's4-e1', titulo: 'Redação Final e Submissão de Produção Científica', creditos: 4, desc: 'Elaboração de artigo em periódico/evento e escrita final.' },
+          { id: 's4-e2', titulo: 'Defesa Pública da Dissertação e Depósito no RI-UFC', creditos: 4, desc: 'Conclusão dos 8 créditos de dissertação e titulação de Mestre(a).' }
+        ]
+      }
+    ];
+
+    // =========================================================================
+    // 2. ESTADO GLOBAL DA APLICAÇÃO
+    // =========================================================================
+    let state = {
+      globalLinha: 'all', // 'all', 'L1', 'L2'
+      discCategoria: 'all',
+      docenteLinha: 'all',
+      dissFiltro: 'all',
+      etapasConcluidas: new Set(['s1-e1', 's1-e2']) // Inicia com 1º semestre marcado como exemplo interativo
+    };
+
+    // =========================================================================
+    // 3. FILTRO CRUZADO POR LINHA DE PESQUISA (L1 / L2)
+    // =========================================================================
+    function setGlobalLinhaFilter(linha) {
+      state.globalLinha = linha;
+      state.docenteLinha = linha;
+
+      // Atualiza visual dos cards de Linha de Pesquisa
+      const cardL1 = document.getElementById('card-linha-1');
+      const cardL2 = document.getElementById('card-linha-2');
+      const badgeL1 = document.getElementById('badge-select-L1');
+      const badgeL2 = document.getElementById('badge-select-L2');
+      const btnReset = document.getElementById('btn-reset-linhas');
+      const crossBanner = document.getElementById('cross-filter-banner');
+      const crossText = document.getElementById('cross-filter-text');
+      const navBadge = document.getElementById('global-filter-badge');
+      const navLabel = document.getElementById('global-filter-label');
+
+      cardL1.classList.remove('border-ufc-royal', 'ring-4', 'ring-ufc-royal/15');
+      cardL2.classList.remove('border-ufc-gold', 'ring-4', 'ring-ufc-gold/20');
+      badgeL1.textContent = 'Filtrar Linha 1';
+      badgeL1.className = 'shrink-0 px-3 py-1 rounded-full text-xs font-bold bg-slate-100 text-slate-600 group-hover:bg-ufc-light group-hover:text-ufc-royal transition-colors';
+      badgeL2.textContent = 'Filtrar Linha 2';
+      badgeL2.className = 'shrink-0 px-3 py-1 rounded-full text-xs font-bold bg-slate-100 text-slate-600 group-hover:bg-amber-100 group-hover:text-amber-800 transition-colors';
+
+      if (linha === 'L1') {
+        cardL1.classList.add('border-ufc-royal', 'ring-4', 'ring-ufc-royal/15');
+        badgeL1.textContent = 'Selecionada ✓';
+        badgeL1.className = 'shrink-0 px-3 py-1 rounded-full text-xs font-bold bg-ufc-royal text-white';
+        btnReset.classList.remove('hidden');
+        crossBanner.classList.remove('hidden');
+        crossText.textContent = 'Filtro ativo: Linha 1 — Representação da Informação e do Conhecimento.';
+        navBadge.classList.remove('hidden');
+        navBadge.classList.add('flex');
+        navLabel.textContent = 'Linha 1 Ativa';
+        state.discCategoria = 'optativa-L1';
+      } else if (linha === 'L2') {
+        cardL2.classList.add('border-ufc-gold', 'ring-4', 'ring-ufc-gold/20');
+        badgeL2.textContent = 'Selecionada ✓';
+        badgeL2.className = 'shrink-0 px-3 py-1 rounded-full text-xs font-bold bg-ufc-gold text-ufc-navy';
+        btnReset.classList.remove('hidden');
+        crossBanner.classList.remove('hidden');
+        crossText.textContent = 'Filtro ativo: Linha 2 — Mediação e Gestão da Informação e do Conhecimento.';
+        navBadge.classList.remove('hidden');
+        navBadge.classList.add('flex');
+        navLabel.textContent = 'Linha 2 Ativa';
+        state.discCategoria = 'optativa-L2';
+      } else {
+        btnReset.classList.add('hidden');
+        crossBanner.classList.add('hidden');
+        navBadge.classList.add('hidden');
+        navBadge.classList.remove('flex');
+        state.discCategoria = 'all';
+      }
+
+      // Sincroniza botões internos das seções
+      updateDiscCategoryButtons();
+      updateDocLinhaButtons();
+      renderDisciplinas();
+      renderDocentes();
+      renderGrupos();
+    }
+
+    // =========================================================================
+    // 4. SEÇÃO 1: INTERATIVIDADE (ÁREA DE CONCENTRAÇÃO E PILARES)
+    // =========================================================================
+    function toggleAreaDetalhes() {
+      const box = document.getElementById('area-detalhes-box');
+      const btnText = document.getElementById('btn-area-text');
+      const isHidden = box.classList.contains('hidden');
+      if (isHidden) {
+        box.classList.remove('hidden');
+        btnText.textContent = 'Ocultar Eixos';
+      } else {
+        box.classList.add('hidden');
+        btnText.textContent = 'Ver Eixos Articuladores';
+      }
+    }
+
+    function switchPilarTab(tabName) {
+      document.querySelectorAll('.pilar-content').forEach(el => el.classList.add('hidden'));
+      document.querySelectorAll('.pilar-tab-btn').forEach(btn => {
+        btn.className = 'pilar-tab-btn py-2 px-2 rounded-lg text-xs font-semibold text-slate-600 hover:text-ufc-navy transition-all';
+      });
+
+      document.getElementById(`content-pilar-${tabName}`).classList.remove('hidden');
+      const activeBtn = document.getElementById(`tab-pilar-${tabName}`);
+      activeBtn.className = 'pilar-tab-btn py-2 px-2 rounded-lg text-xs font-bold bg-white text-ufc-navy shadow-sm transition-all';
+    }
+
+    // =========================================================================
+    // 5. SEÇÃO 3: EXPLORADOR DE DISCIPLINAS
+    // =========================================================================
+    function filterDisciplinas(cat) {
+      state.discCategoria = cat;
+      updateDiscCategoryButtons();
+      renderDisciplinas();
+    }
+
+    function updateDiscCategoryButtons() {
+      document.querySelectorAll('.disc-cat-btn').forEach(btn => {
+        const isSelected = btn.getAttribute('data-disc-cat') === state.discCategoria;
+        if (isSelected) {
+          btn.className = 'disc-cat-btn px-3.5 py-2 rounded-xl text-xs font-bold bg-ufc-navy text-white shadow-sm transition-all';
+        } else {
+          btn.className = 'disc-cat-btn px-3.5 py-2 rounded-xl text-xs font-semibold bg-white text-slate-600 hover:bg-slate-100 border border-slate-200 transition-all';
+        }
+      });
+    }
+
+    function renderDisciplinas() {
+      const grid = document.getElementById('disciplinas-grid');
+      const query = document.getElementById('disc-search-input').value.toLowerCase().trim();
+
+      const filtradas = DISCIPLINAS_DATA.filter(d => {
+        const matchCat = state.discCategoria === 'all' || d.categoria === state.discCategoria;
+        const matchQuery = !query || 
+          d.nome.toLowerCase().includes(query) || 
+          d.ementa.toLowerCase().includes(query) || 
+          d.sigla.toLowerCase().includes(query);
+        return matchCat && matchQuery;
+      });
+
+      if (filtradas.length === 0) {
+        grid.innerHTML = `
+          <div class="col-span-full bg-white rounded-2xl p-8 text-center border border-slate-200">
+            <p class="text-slate-600 font-medium">Nenhuma disciplina encontrada com os filtros atuais.</p>
+            <button onclick="filterDisciplinas('all'); document.getElementById('disc-search-input').value='';" class="mt-3 px-4 py-2 rounded-xl bg-ufc-light text-ufc-royal text-xs font-bold">
+              Limpar filtros de disciplinas
+            </button>
+          </div>
+        `;
+        return;
+      }
+
+      grid.innerHTML = filtradas.map(d => {
+        let badgeColor = 'bg-slate-100 text-slate-700';
+        if (d.categoria === 'obrigatoria') badgeColor = 'bg-ufc-navy text-white';
+        else if (d.categoria === 'optativa-L1') badgeColor = 'bg-ufc-light text-ufc-royal';
+        else if (d.categoria === 'optativa-L2') badgeColor = 'bg-amber-100 text-amber-800';
+        else if (d.categoria === 'atividade') badgeColor = 'bg-emerald-100 text-emerald-800';
+
+        return `
+          <div onclick="openDisciplinaModal('${d.id}')" class="cursor-pointer group bg-white rounded-2xl p-5 shadow-card hover:shadow-card-hover border border-slate-100 hover:border-ufc-royal/30 transition-all flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between gap-2 mb-3">
+                <span class="px-2.5 py-1 rounded-lg text-[11px] font-bold ${badgeColor}">
+                  ${d.tipoLabel}
+                </span>
+                <span class="text-xs font-bold text-slate-500 bg-slate-100 px-2.5 py-1 rounded-lg">
+                  ${d.creditos} créd. • ${d.cargaHoraria}
+                </span>
+              </div>
+              <h4 class="text-base font-bold text-ufc-navy group-hover:text-ufc-royal transition-colors leading-snug mb-2">
+                ${d.nome}
+              </h4>
+              <p class="text-xs text-slate-600 line-clamp-3 leading-relaxed">
+                ${d.ementa}
+              </p>
+            </div>
+            <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs font-semibold text-ufc-royal">
+              <span>Código ref.: ${d.sigla}</span>
+              <span class="flex items-center gap-1 group-hover:translate-x-0.5 transition-transform">
+                <span>Ver ementa</span>
+                <i data-lucide="chevron-right" class="w-3.5 h-3.5"></i>
+              </span>
+            </div>
+          </div>
+        `;
+      }).join('');
+
+      lucide.createIcons();
+    }
+
+    function openDisciplinaModal(id) {
+      const d = DISCIPLINAS_DATA.find(item => item.id === id);
+      if (!d) return;
+
+      const modalBody = document.getElementById('modal-body-content');
+      modalBody.innerHTML = `
+        <span class="inline-block px-3 py-1 rounded-full text-xs font-bold bg-ufc-light text-ufc-royal mb-3">
+          ${d.tipoLabel} • ${d.sigla}
+        </span>
+        <h3 class="text-xl sm:text-2xl font-display font-extrabold text-ufc-navy mb-4">
+          ${d.nome}
+        </h3>
+        <div class="grid grid-cols-3 gap-3 mb-5">
+          <div class="bg-slate-50 p-3 rounded-xl border border-slate-100 text-center">
+            <div class="text-[11px] text-slate-500">Créditos</div>
+            <div class="text-base font-bold text-ufc-navy">${d.creditos} créditos</div>
+          </div>
+          <div class="bg-slate-50 p-3 rounded-xl border border-slate-100 text-center">
+            <div class="text-[11px] text-slate-500">Carga Horária</div>
+            <div class="text-base font-bold text-ufc-navy">${d.cargaHoraria}</div>
+          </div>
+          <div class="bg-slate-50 p-3 rounded-xl border border-slate-100 text-center">
+            <div class="text-[11px] text-slate-500">Linha</div>
+            <div class="text-base font-bold text-ufc-navy">${d.linha === 'L1' ? 'Linha 1' : d.linha === 'L2' ? 'Linha 2' : 'Todas'}</div>
+          </div>
+        </div>
+        <div class="space-y-2 mb-6">
+          <h4 class="text-xs font-bold uppercase tracking-wider text-slate-500">Ementa Resumida</h4>
+          <p class="text-sm text-slate-700 leading-relaxed bg-slate-50 p-4 rounded-2xl border border-slate-100">
+            ${d.ementa}
+          </p>
+        </div>
+        <div class="flex flex-wrap items-center justify-between gap-3">
+          <a href="https://ppgci.ufc.br/disciplinas/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 text-xs font-bold text-ufc-royal hover:underline">
+            <span>Consultar oferta semestral no portal PPGCI</span>
+            <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
+          </a>
+          <button onclick="closeDetailModal()" class="px-5 py-2.5 rounded-xl bg-ufc-navy text-white text-xs font-bold hover:bg-ufc-royal transition-colors">
+            Fechar
+          </button>
+        </div>
+      `;
+      openDetailModal();
+    }
+
+    // =========================================================================
+    // 6. SEÇÃO 4: CORPO DOCENTE
+    // =========================================================================
+    function setDocenteLinhaFilter(linha) {
+      state.docenteLinha = linha;
+      updateDocLinhaButtons();
+      renderDocentes();
+    }
+
+    function updateDocLinhaButtons() {
+      document.querySelectorAll('.doc-linha-btn').forEach(btn => {
+        const isSelected = btn.getAttribute('data-doc-linha') === state.docenteLinha;
+        if (isSelected) {
+          btn.className = 'doc-linha-btn px-3 py-1.5 rounded-lg text-xs font-bold bg-white text-ufc-navy shadow-sm transition-all';
+        } else {
+          btn.className = 'doc-linha-btn px-3 py-1.5 rounded-lg text-xs font-semibold text-slate-600 hover:text-ufc-navy transition-all';
+        }
+      });
+    }
+
+    function renderDocentes() {
+      const grid = document.getElementById('docentes-grid');
+      const vinculo = document.getElementById('doc-vinculo-select').value;
+      const query = document.getElementById('doc-search-input').value.toLowerCase().trim();
+
+      const filtrados = DOCENTES_DATA.filter(doc => {
+        const matchLinha = state.docenteLinha === 'all' || doc.linha === state.docenteLinha;
+        const matchVinculo = vinculo === 'all' || doc.vinculo === vinculo;
+        const matchQuery = !query || 
+          doc.nome.toLowerCase().includes(query) || 
+          doc.temas.some(t => t.toLowerCase().includes(query)) ||
+          doc.grupo.toLowerCase().includes(query);
+        return matchLinha && matchVinculo && matchQuery;
+      });
+
+      document.getElementById('docentes-count-label').textContent = filtrados.length;
+
+      if (filtrados.length === 0) {
+        grid.innerHTML = `
+          <div class="col-span-full bg-white rounded-2xl p-8 text-center border border-slate-200">
+            <p class="text-slate-600 font-medium">Nenhum docente encontrado para os critérios selecionados.</p>
+            <button onclick="setDocenteLinhaFilter('all'); document.getElementById('doc-vinculo-select').value='all'; document.getElementById('doc-search-input').value=''; renderDocentes();" class="mt-3 px-4 py-2 rounded-xl bg-ufc-light text-ufc-royal text-xs font-bold">
+              Restaurar lista completa
+            </button>
+          </div>
+        `;
+        return;
+      }
+
+      grid.innerHTML = filtrados.map((doc, idx) => {
+        const iniciais = doc.nome
+          .replace(/Profa?\.\s*Dra?\.\s*/i, '')
+          .split(' ')
+          .filter(Boolean)
+          .slice(0, 2)
+          .map(p => p[0])
+          .join('');
+
+        const isL1 = doc.linha === 'L1';
+        const linhaBadgeClass = isL1 ? 'bg-ufc-light text-ufc-royal' : 'bg-amber-100 text-amber-800';
+        const avatarBg = isL1 ? 'bg-ufc-navy text-white' : 'bg-ufc-gold text-ufc-navy';
+
+        return `
+          <div class="bg-white rounded-2xl p-5 shadow-card hover:shadow-card-hover border border-slate-100 transition-all flex flex-col justify-between">
+            <div>
+              <div class="flex items-start gap-3.5 mb-3.5">
+                <div class="w-11 h-11 rounded-2xl ${avatarBg} flex items-center justify-center font-display font-extrabold text-sm shrink-0 shadow-sm">
+                  ${iniciais}
+                </div>
+                <div class="min-w-0">
+                  <h4 class="text-sm sm:text-base font-bold text-ufc-navy leading-snug">
+                    ${doc.nome}
+                  </h4>
+                  <div class="flex flex-wrap items-center gap-1.5 mt-1">
+                    <span class="px-2 py-0.5 rounded-md text-[11px] font-bold ${linhaBadgeClass}">
+                      ${isL1 ? 'Linha 1' : 'Linha 2'}
+                    </span>
+                    <span class="px-2 py-0.5 rounded-md text-[11px] font-medium bg-slate-100 text-slate-600">
+                      ${doc.vinculo}
+                    </span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="mb-4">
+                <div class="text-[11px] font-bold uppercase tracking-wider text-slate-400 mb-1.5">Temáticas de Orientação</div>
+                <div class="flex flex-wrap gap-1.5">
+                  ${doc.temas.slice(0, 3).map(t => `
+                    <span class="px-2.5 py-1 rounded-lg bg-slate-50 border border-slate-200/80 text-slate-700 text-[11px] font-medium">
+                      ${t}
+                    </span>
+                  `).join('')}
+                  ${doc.temas.length > 3 ? `<span class="px-2 py-1 text-[11px] font-semibold text-ufc-royal">+${doc.temas.length - 3}</span>` : ''}
+                </div>
+              </div>
+            </div>
+
+            <div class="pt-3 border-t border-slate-100 flex items-center justify-between gap-2">
+              <button onclick="openDocenteModal(${DOCENTES_DATA.indexOf(doc)})" class="text-xs font-bold text-ufc-navy hover:text-ufc-royal transition-colors flex items-center gap-1">
+                <span>Ver Perfil & Temas</span>
+                <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+              </button>
+              <a href="https://ppgci.ufc.br/corpo-docente/" target="_blank" rel="noopener noreferrer" class="text-xs font-semibold text-slate-500 hover:text-ufc-royal flex items-center gap-1" title="Consultar no Portal PPGCI / Lattes">
+                <span>Portal / Lattes</span>
+                <i data-lucide="external-link" class="w-3 h-3"></i>
+              </a>
+            </div>
+          </div>
+        `;
+      }).join('');
+
+      lucide.createIcons();
+    }
+
+    function openDocenteModal(index) {
+      const doc = DOCENTES_DATA[index];
+      if (!doc) return;
+
+      const lattesSearchUrl = `https://www.google.com/search?q=site:lattes.cnpq.br+${encodeURIComponent(doc.lattesQuery)}`;
+      const modalBody = document.getElementById('modal-body-content');
+
+      modalBody.innerHTML = `
+        <div class="flex items-center gap-2 mb-3">
+          <span class="px-3 py-1 rounded-full text-xs font-bold ${doc.linha === 'L1' ? 'bg-ufc-light text-ufc-royal' : 'bg-amber-100 text-amber-800'}">
+            ${doc.linha === 'L1' ? 'Linha 1 • Representação' : 'Linha 2 • Mediação e Gestão'}
+          </span>
+          <span class="px-3 py-1 rounded-full text-xs font-semibold bg-slate-100 text-slate-700">
+            Docente ${doc.vinculo}
+          </span>
+        </div>
+        <h3 class="text-xl sm:text-2xl font-display font-extrabold text-ufc-navy mb-2">
+          ${doc.nome}
+        </h3>
+        <p class="text-xs text-slate-500 mb-5">
+          Programa de Pós-Graduação em Ciência da Informação • UFC
+        </p>
+
+        <div class="space-y-4 mb-6">
+          <div>
+            <h4 class="text-xs font-bold uppercase tracking-wider text-slate-500 mb-2">Áreas de Atuação e Temas de Orientação</h4>
+            <div class="flex flex-wrap gap-2">
+              ${doc.temas.map(t => `
+                <span class="px-3 py-1.5 rounded-xl bg-slate-50 border border-slate-200 text-slate-800 text-xs font-semibold">
+                  ${t}
+                </span>
+              `).join('')}
+            </div>
+          </div>
+
+          <div class="bg-ufc-light/60 p-4 rounded-2xl border border-ufc-royal/15">
+            <div class="text-xs font-bold text-ufc-navy mb-1">Grupo de Pesquisa Vinculado</div>
+            <div class="text-sm font-semibold text-ufc-royal">${doc.grupo}</div>
+          </div>
+        </div>
+
+        <div class="flex flex-wrap items-center justify-between gap-3 pt-4 border-t border-slate-100">
+          <div class="flex flex-wrap gap-2">
+            <a href="https://ppgci.ufc.br/corpo-docente/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-ufc-light text-ufc-navy text-xs font-bold hover:bg-blue-100 transition-colors">
+              <span>Perfil PPGCI</span>
+              <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
+            </a>
+            <a href="${lattesSearchUrl}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-slate-100 text-slate-700 text-xs font-bold hover:bg-slate-200 transition-colors">
+              <span>Buscar Currículo Lattes</span>
+              <i data-lucide="search" class="w-3.5 h-3.5"></i>
+            </a>
+          </div>
+          <button onclick="closeDetailModal()" class="px-4 py-2 rounded-xl bg-ufc-navy text-white text-xs font-bold">
+            Fechar
+          </button>
+        </div>
+      `;
+      openDetailModal();
+    }
+
+    // =========================================================================
+    // 7. SEÇÃO 5: GRUPOS DE PESQUISA & DISSERTAÇÕES + GRÁFICO CHART.JS
+    // =========================================================================
+    function renderGrupos() {
+      const grid = document.getElementById('grupos-grid');
+      const filtrados = GRUPOS_DATA.filter(g => state.globalLinha === 'all' || g.linha === state.globalLinha);
+
+      grid.innerHTML = filtrados.map(g => {
+        const isL1 = g.linha === 'L1';
+        return `
+          <div class="bg-white rounded-2xl p-6 shadow-card hover:shadow-card-hover border border-slate-100 transition-all flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between gap-2 mb-3">
+                <span class="px-3 py-1 rounded-xl text-xs font-extrabold tracking-wide bg-ufc-navy text-ufc-gold">
+                  ${g.sigla}
+                </span>
+                <span class="px-2.5 py-0.5 rounded-full text-[11px] font-bold ${isL1 ? 'bg-ufc-light text-ufc-royal' : 'bg-amber-100 text-amber-800'}">
+                  ${isL1 ? 'Linha 1' : 'Linha 2'}
+                </span>
+              </div>
+              <h4 class="text-base font-bold text-ufc-navy leading-snug mb-2.5">
+                ${g.nome}
+              </h4>
+              <p class="text-xs sm:text-sm text-slate-600 leading-relaxed mb-4">
+                ${g.foco}
+              </p>
+            </div>
+            <div class="pt-3 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
+              <span>Certificado CNPq</span>
+              <a href="https://ppgci.ufc.br/pesquisas/grupos-de-pesquisa/" target="_blank" rel="noopener noreferrer" class="font-bold text-ufc-royal hover:underline flex items-center gap-1">
+                <span>Detalhes</span>
+                <i data-lucide="external-link" class="w-3 h-3"></i>
+              </a>
+            </div>
+          </div>
+        `;
+      }).join('');
+
+      lucide.createIcons();
+    }
+
+    function filterDissertacoes(linha) {
+      state.dissFiltro = linha;
+      document.querySelectorAll('.diss-filter-btn').forEach(btn => {
+        const active = btn.getAttribute('data-diss-filter') === linha;
+        btn.className = active
+          ? 'diss-filter-btn px-3 py-1 rounded-lg text-xs font-bold bg-ufc-navy text-white'
+          : 'diss-filter-btn px-3 py-1 rounded-lg text-xs font-semibold bg-slate-100 text-slate-600 hover:bg-slate-200';
+      });
+      renderDissertacoes();
+    }
+
+    function renderDissertacoes() {
+      const container = document.getElementById('dissertacoes-list');
+      const lista = DISSERTACOES_DESTAQUE.filter(d => state.dissFiltro === 'all' || d.linha === state.dissFiltro);
+
+      container.innerHTML = lista.map(d => `
+        <div class="p-4 rounded-2xl bg-slate-50 hover:bg-ufc-light/40 border border-slate-200/80 transition-colors flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+          <div class="space-y-1">
+            <div class="flex flex-wrap items-center gap-2">
+              <span class="px-2 py-0.5 rounded-md text-[11px] font-bold ${d.linha === 'L1' ? 'bg-ufc-light text-ufc-royal' : 'bg-amber-100 text-amber-800'}">
+                ${d.linha === 'L1' ? 'Linha 1' : 'Linha 2'}
+              </span>
+              <span class="text-[11px] font-semibold text-slate-500">${d.tema}</span>
+            </div>
+            <p class="text-xs sm:text-sm font-bold text-ufc-navy leading-snug">
+              ${d.titulo}
+            </p>
+          </div>
+          <a href="https://ppgci.ufc.br/producoes-ppgci/dissertacoes/" target="_blank" rel="noopener noreferrer" class="shrink-0 self-start sm:self-center px-3 py-1.5 rounded-xl bg-white border border-slate-200 hover:border-ufc-royal text-xs font-bold text-ufc-royal transition-colors flex items-center gap-1">
+            <span>Acessar</span>
+            <i data-lucide="arrow-up-right" class="w-3.5 h-3.5"></i>
+          </a>
+        </div>
+      `).join('');
+
+      lucide.createIcons();
+    }
+
+    function initDissertacoesChart() {
+      const ctx = document.getElementById('dissertacoesChart');
+      if (!ctx || typeof Chart === 'undefined') return;
+
+      new Chart(ctx, {
+        type: 'doughnut',
+        data: {
+          labels: [
+            'Mediação e Competência em Informação',
+            'Organização e Representação do Conhecimento',
+            'Gestão da Informação e Inovação',
+            'Comunicação Científica e Estudos Métricos',
+            'Memória e Preservação Digital'
+          ],
+          datasets: [{
+            data: [30, 26, 18, 14, 12],
+            backgroundColor: [
+              '#003366',
+              '#0055A5',
+              '#F2A900',
+              '#0D9488',
+              '#64748B'
+            ],
+            borderWidth: 2,
+            borderColor: '#FFFFFF',
+            hoverOffset: 8
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          cutout: '62%',
+          plugins: {
+            legend: {
+              position: 'bottom',
+              labels: {
+                boxWidth: 11,
+                padding: 10,
+                font: { size: 11, family: 'Inter' },
+                color: '#334155'
+              }
+            },
+            tooltip: {
+              callbacks: {
+                label: function(context) {
+                  return ` ${context.label}: ~${context.parsed}% das produções`;
+                }
+              }
+            }
+          }
+        }
+      });
+    }
+
+    // =========================================================================
+    // 8. SEÇÃO 6: SIMULADOR INTERATIVO DA JORNADA DO MESTRANDO (24 MESES)
+    // =========================================================================
+    function renderSimulador() {
+      const grid = document.getElementById('semestres-checklist-grid');
+
+      grid.innerHTML = SEMESTRES_JORNADA.map(sem => `
+        <div class="bg-white rounded-2xl p-5 shadow-card border border-slate-100 flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between mb-4 pb-3 border-b border-slate-100">
+              <span class="px-3 py-1 rounded-xl text-xs font-extrabold text-white ${sem.cor}">
+                ${sem.semestre}
+              </span>
+              <span class="text-xs font-semibold text-slate-500">${sem.periodo}</span>
+            </div>
+
+            <div class="space-y-3">
+              ${sem.etapas.map(et => {
+                const checked = state.etapasConcluidas.has(et.id);
+                return `
+                  <label onclick="toggleEtapaSimulador('${et.id}')" class="cursor-pointer block p-3.5 rounded-xl border transition-all ${checked ? 'bg-emerald-50/70 border-emerald-300' : 'bg-slate-50/80 border-slate-200/80 hover:border-ufc-royal/40'}">
+                    <div class="flex items-start gap-2.5">
+                      <div class="w-5 h-5 rounded-md flex items-center justify-center shrink-0 mt-0.5 transition-colors ${checked ? 'bg-emerald-600 text-white' : 'bg-white border border-slate-300'}">
+                        ${checked ? '<i data-lucide="check" class="w-3.5 h-3.5"></i>' : ''}
+                      </div>
+                      <div class="flex-1">
+                        <div class="text-xs font-bold ${checked ? 'text-emerald-950' : 'text-ufc-navy'} leading-snug">
+                          ${et.titulo}
+                        </div>
+                        <p class="text-[11px] text-slate-600 mt-1 leading-relaxed">
+                          ${et.desc}
+                        </p>
+                        ${et.creditos > 0 ? `
+                          <span class="inline-block mt-1.5 px-2 py-0.5 rounded-md text-[10px] font-bold ${checked ? 'bg-emerald-200/80 text-emerald-900' : 'bg-ufc-light text-ufc-royal'}">
+                            +${et.creditos} créditos (${et.creditos * 16}h)
+                          </span>
+                        ` : ''}
+                      </div>
+                    </div>
+                  </label>
+                `;
+              }).join('')}
+            </div>
+          </div>
+        </div>
+      `).join('');
+
+      updateSimuladorMetrics();
+      lucide.createIcons();
+    }
+
+    function toggleEtapaSimulador(etapaId) {
+      if (state.etapasConcluidas.has(etapaId)) {
+        state.etapasConcluidas.delete(etapaId);
+      } else {
+        state.etapasConcluidas.add(etapaId);
+      }
+      renderSimulador();
+    }
+
+    function resetSimulador() {
+      state.etapasConcluidas.clear();
+      renderSimulador();
+    }
+
+    function updateSimuladorMetrics() {
+      let totalCreditos = 0;
+      let totalMarcos = 0;
+      const totalMarcosPossiveis = 8;
+
+      SEMESTRES_JORNADA.forEach(sem => {
+        sem.etapas.forEach(et => {
+          if (state.etapasConcluidas.has(et.id)) {
+            totalCreditos += et.creditos;
+            totalMarcos += 1;
+          }
+        });
+      });
+
+      const percent = Math.round((totalMarcos / totalMarcosPossiveis) * 100);
+      document.getElementById('sim-percent-text').textContent = `${percent}%`;
+      document.getElementById('sim-progress-bar').style.width = `${percent}%`;
+      document.getElementById('sim-creditos-atual').textContent = totalCreditos;
+      document.getElementById('sim-horas-atual').textContent = totalCreditos * 16;
+      document.getElementById('sim-marcos-atual').textContent = totalMarcos;
+
+      const msgEl = document.getElementById('sim-status-msg');
+      if (percent === 0) {
+        msgEl.textContent = 'Selecione as etapas concluídas nos semestres abaixo para calcular seus créditos e marcos acadêmicos.';
+      } else if (percent < 50) {
+        msgEl.textContent = 'Fase de integralização de créditos e consolidação teórico-metodológica do projeto.';
+      } else if (percent < 100) {
+        msgEl.textContent = 'Fase avançada: qualificação, estágio de docência e escrita final da dissertação.';
+      } else {
+        msgEl.textContent = 'Parabéns! Todos os 24 créditos e requisitos regimentais para o título de Mestre(a) em Ciência da Informação foram concluídos!';
+      }
+    }
+
+    // =========================================================================
+    // 9. CONTROLE DE MODAIS E NAVEGAÇÃO ATIVA (SCROLLSPY)
+    // =========================================================================
+    function openDetailModal() {
+      const modal = document.getElementById('detail-modal');
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+      document.body.style.overflow = 'hidden';
+      lucide.createIcons();
+    }
+
+    function closeDetailModal() {
+      const modal = document.getElementById('detail-modal');
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
+      document.body.style.overflow = '';
+    }
+
+    function closeModalOnBackdrop(event) {
+      if (event.target.id === 'detail-modal') {
+        closeDetailModal();
+      }
+    }
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeDetailModal();
+    });
+
+    function copiarReferenciaABNT() {
+      const texto = document.getElementById('texto-referencia-abnt').innerText.trim();
+      const btn = document.getElementById('btn-copy-abnt');
+      const textarea = document.createElement('textarea');
+      textarea.value = texto;
+      textarea.style.position = 'fixed';
+      textarea.style.opacity = '0';
+      document.body.appendChild(textarea);
+      textarea.select();
+      try {
+        document.execCommand('copy');
+        btn.innerHTML = '<i data-lucide="check" class="w-3 h-3 text-emerald-300"></i><span class="text-emerald-300">Copiada!</span>';
+        lucide.createIcons();
+        setTimeout(() => {
+          btn.innerHTML = '<i data-lucide="copy" class="w-3 h-3"></i><span>Copiar citação</span>';
+          lucide.createIcons();
+        }, 2200);
+      } catch (err) {
+        // Falha silenciosa mantendo o texto selecionável
+      }
+      document.body.removeChild(textarea);
+    }
+
+    function initScrollSpy() {
+      const sections = ['apresentacao', 'linhas', 'disciplinas', 'docentes', 'grupos-producao', 'simulador'];
+      const navLinks = document.querySelectorAll('.nav-pill');
+
+      window.addEventListener('scroll', () => {
+        let current = sections[0];
+        const scrollPos = window.scrollY + 140;
+
+        sections.forEach(secId => {
+          const el = document.getElementById(secId);
+          if (el && el.offsetTop <= scrollPos) {
+            current = secId;
+          }
+        });
+
+        navLinks.forEach(link => {
+          const target = link.getAttribute('data-nav');
+          if (target === current) {
+            link.className = 'nav-pill shrink-0 px-3.5 py-2 rounded-xl text-xs sm:text-sm font-bold text-ufc-navy bg-ufc-light transition-all flex items-center gap-1.5';
+          } else {
+            link.className = 'nav-pill shrink-0 px-3.5 py-2 rounded-xl text-xs sm:text-sm font-medium text-slate-600 hover:text-ufc-navy hover:bg-slate-100 transition-all flex items-center gap-1.5';
+          }
+        });
+      }, { passive: true });
+    }
+
+    // =========================================================================
+    // 10. INICIALIZAÇÃO GERAL AO CARREGAR A PÁGINA
+    // =========================================================================
+    window.addEventListener('DOMContentLoaded', () => {
+      // Atualiza contadores iniciais nos cards de Linhas e Disciplinas
+      document.getElementById('disc-total-count').textContent = DISCIPLINAS_DATA.length;
+      document.getElementById('count-docentes-L1').textContent = DOCENTES_DATA.filter(d => d.linha === 'L1').length;
+      document.getElementById('count-docentes-L2').textContent = DOCENTES_DATA.filter(d => d.linha === 'L2').length;
+      document.getElementById('count-disc-L1').textContent = DISCIPLINAS_DATA.filter(d => d.linha === 'L1' || d.linha === 'Ambas').length;
+      document.getElementById('count-disc-L2').textContent = DISCIPLINAS_DATA.filter(d => d.linha === 'L2' || d.linha === 'Ambas').length;
+
+      // Renderiza todos os módulos interativos
+      renderDisciplinas();
+      renderDocentes();
+      renderGrupos();
+      renderDissertacoes();
+      renderSimulador();
+      initDissertacoesChart();
+      initScrollSpy();
+      lucide.createIcons();
+    });
+  </script>
+</body>
+</html>
