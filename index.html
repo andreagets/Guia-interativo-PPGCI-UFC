@@ -301,7 +301,7 @@
             <span class="text-xs font-medium text-blue-200">Orientação</span>
             <i data-lucide="users" class="w-4 h-4 text-ufc-gold"></i>
           </div>
-          <div class="text-xl sm:text-2xl font-display font-extrabold text-white">12 Docentes</div>
+          <div id="hero-kpi-docentes" class="text-xl sm:text-2xl font-display font-extrabold text-white">13 Docentes</div>
           <div class="text-[11px] text-blue-100/80 mt-0.5">Permanentes e colaboradores</div>
         </div>
       </div>
@@ -2124,6 +2124,23 @@ const DISCIPLINAS_DATA = [
     lattesQuery: 'Osvaldo de Souza UFC'
   },
   {
+    nome: 'Profa. Dra. Virgínia Bentes Pinto',
+    linha: 'L1',
+    linhaNome: 'Informação, organização, comunicação e tecnologia',
+    vinculo: 'Permanente',
+    temas: [
+      'Representação temática e indexação da informação',
+      'Prontuário do paciente e informação em saúde',
+      'Preservação digital de documentos clínicos',
+      'Ontologias e linguagens documentárias',
+      'Arquitetura e organização da informação'
+    ],
+    grupo: 'Não informado na página de grupos do PPGCI',
+    formacao: 'Professora Titular da UFC. Doutorado em Sciences de l\'Information et de la Communication (Université Stendhal Grenoble 3, 1999); Mestrado em Ciência da Informação (UFMG, 1989); Pós-Doutorado em Tratamento Cognitivo da Informação (UQAM/LANCI, 2006).',
+    proveniencia: 'Retorno ao quadro permanente da Linha 1 informado pela autora em 27/11/2026 (portal institucional em atualização).',
+    lattesQuery: 'Virgínia Bentes Pinto UFC'
+  },
+  {
     nome: 'Prof. Dr. Antônio Wagner Chacon Silva',
     linha: 'L2',
     linhaNome: 'Informação, sociedade e cultura',
@@ -2843,6 +2860,17 @@ const SEMESTRES_JORNADA = [
             <div class="text-xs font-bold text-ufc-navy mb-1">Grupo de Pesquisa Vinculado</div>
             <div class="text-sm font-semibold text-ufc-royal">${doc.grupo}</div>
           </div>
+          ${doc.formacao ? `<div class="bg-slate-50 p-3.5 rounded-2xl border border-slate-200 text-xs text-slate-700 leading-relaxed"><strong class="text-ufc-navy">Formação acadêmica:</strong> ${doc.formacao}</div>` : ''}
+          ${doc.proveniencia ? `<div class="bg-amber-50 p-3 rounded-xl border border-amber-200 text-[11px] text-amber-900"><strong>Registro de atualização:</strong> ${doc.proveniencia}</div>` : ''}
+          ${(() => {
+            const matches = PPGCI_OBSERVATORIO_DISSERTACOES.filter(d => normSearch(d.orientador) === normSearch(doc.nome.replace(/^Profa?\.\s*Dra?\.\s*/i, '')));
+            if (!matches.length) return '';
+            const advName = matches[0].orientador;
+            return `<div class="bg-slate-50 p-3.5 rounded-2xl border border-slate-200 flex items-center justify-between gap-2">
+              <span class="text-xs text-slate-700"><strong>Base CAPES (2018–2024):</strong> ${matches.length} dissertação(ões) orientada(s)</span>
+              <button type="button" onclick="closeDetailModal(); irParaAcervoComFiltro({orientador: '${escapeHtml(advName)}'});" class="px-3 py-1.5 rounded-lg bg-ufc-navy text-white text-[11px] font-bold hover:bg-ufc-royal">Ver orientações</button>
+            </div>`;
+          })()}
         </div>
 
         <div class="flex flex-wrap items-center justify-between gap-3 pt-4 border-t border-slate-100">
@@ -3893,6 +3921,7 @@ function updateSimuladorMetrics() {
     window.addEventListener('DOMContentLoaded', () => {
       // Atualiza contadores iniciais nos cards de Linhas e Disciplinas
       document.getElementById('disc-total-count').textContent = DISCIPLINAS_DATA.length;
+      const heroDocEl = document.getElementById('hero-kpi-docentes'); if (heroDocEl) heroDocEl.textContent = `${DOCENTES_DATA.length} Docentes`;
       document.getElementById('count-docentes-L1').textContent = DOCENTES_DATA.filter(d => d.linha === 'L1').length;
       document.getElementById('count-docentes-L2').textContent = DOCENTES_DATA.filter(d => d.linha === 'L2').length;
       document.getElementById('count-disc-L1').textContent = DISCIPLINAS_DATA.filter(d => d.linha === 'L1' || d.linha === 'Ambas').length;
