@@ -292,7 +292,7 @@
             <span class="text-xs font-medium text-blue-200">Pesquisa CNPq</span>
             <i data-lucide="network" class="w-4 h-4 text-ufc-gold"></i>
           </div>
-          <div class="text-xl sm:text-2xl font-display font-extrabold text-white">5+ Grupos</div>
+          <div class="text-xl sm:text-2xl font-display font-extrabold text-white">8 Grupos</div>
           <div class="text-[11px] text-blue-100/80 mt-0.5">Núcleos ativos certificados</div>
         </div>
 
@@ -2061,7 +2061,7 @@ const GRUPOS_DATA = [
                   </h4>
                   <div class="flex flex-wrap items-center gap-1.5 mt-1">
                     <span class="px-2 py-0.5 rounded-md text-[11px] font-bold ${linhaBadgeClass}">
-                      ${isL1 ? 'Linha 1' : 'Linha 2'}
+                     ${g.linha === 'Ambas' ? 'Linhas 1 e 2' : isL1 ? 'Linha 1' : 'Linha 2'}
                     </span>
                     <span class="px-2 py-0.5 rounded-md text-[11px] font-medium bg-slate-100 text-slate-600">
                       ${doc.vinculo}
