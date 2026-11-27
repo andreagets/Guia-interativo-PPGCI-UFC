@@ -1866,38 +1866,73 @@ const GRUPOS_DATA = [
 ];
 
 
-    const DISSERTACOES_DESTAQUE = [
-      {
-        titulo: 'Mediação da informação e protagonismo social em bibliotecas comunitárias de Fortaleza: práticas de apropriação cultural',
-        linha: 'L2',
-        ano: '2024',
-        tema: 'Mediação e Competência em Informação'
-      },
-      {
-        titulo: 'Modelagem ontológica e representação semântica de dados clínicos para interoperabilidade em prontuários eletrônicos',
-        linha: 'L1',
-        ano: '2024',
-        tema: 'Organização e Representação do Conhecimento'
-      },
-      {
-        titulo: 'Competência em informação e comportamento informacional de pesquisadores no ecossistema da Ciência Aberta',
-        linha: 'L2',
-        ano: '2023',
-        tema: 'Comunicação Científica e Estudos Métricos'
-      },
-      {
-        titulo: 'Curadoria e preservação digital de acervos fotográficos institucionais: diretrizes baseadas no modelo de referência OAIS',
-        linha: 'L1',
-        ano: '2023',
-        tema: 'Memória e Preservação Digital'
-      },
-      {
-        titulo: 'Fluxos informacionais e gestão do conhecimento como suporte à inovação aberta em incubadoras tecnológicas universitárias',
-        linha: 'L2',
-        ano: '2022',
-        tema: 'Gestão da Informação e Inovação'
-      }
-    ];
+    
+const DISSERTACOES_DESTAQUE = [
+  {
+    titulo: 'Práticas de desinformação como forma de disputa pela memória',
+    autor: 'Flávio Sousa de Andrade Junior',
+    linha: 'L2',
+    ano: '2026',
+    tema: 'Memória e desinformação'
+  },
+  {
+    titulo: 'Inteligência artificial como ferramenta de mediação da informação',
+    autor: 'Érika Leite Fernandes',
+    linha: 'L1',
+    ano: '2026',
+    tema: 'Tecnologias digitais e comunicação'
+  },
+  {
+    titulo: 'Competência em informação: saberes e práticas docentes da educação profissional e tecnológica',
+    autor: 'Katiúscia de Sousa Dias',
+    linha: 'L2',
+    ano: '2026',
+    tema: 'Mediação e competência em informação'
+  },
+  {
+    titulo: 'Produção científica sobre desinformação no ENANCIB e na COMPÓS',
+    autor: 'Wilnan Custódio de Oliveira',
+    linha: 'L1',
+    ano: '2026',
+    tema: 'Tecnologias digitais e comunicação'
+  },
+  {
+    titulo: 'Fotografia periférica e suas mediações como resposta a estigmas sociais',
+    autor: 'Paulo Marcelo Freitas Vieira',
+    linha: 'L2',
+    ano: '2026',
+    tema: 'Cultura e sociedade'
+  },
+  {
+    titulo: 'Diretrizes para gestão da qualidade em bibliotecas universitárias: uma análise entre Brasil e Alemanha',
+    autor: 'Juliana de Sousa Lima',
+    linha: 'L2',
+    ano: '2025',
+    tema: 'Gestão da informação'
+  },
+  {
+    titulo: 'Nanoarte: entre a expressão artística e o conhecimento científico',
+    autor: 'Karoline Gomes de Sousa',
+    linha: 'L1',
+    ano: '2025',
+    tema: 'Tecnologias digitais e comunicação'
+  },
+  {
+    titulo: 'Mediações em rede na cultura participativa dos fãs de literatura queer',
+    autor: 'Leandra Alencar Soares Lima de Passo',
+    linha: 'L2',
+    ano: '2025',
+    tema: 'Cultura e sociedade'
+  },
+  {
+    titulo: 'Gestão da informação na saúde pública sob a perspectiva feminina',
+    autor: 'Tayssa Nobre Lobo',
+    linha: 'L2',
+    ano: '2025',
+    tema: 'Gestão da informação'
+  }
+];
+
 
     const SEMESTRES_JORNADA = [
       {
@@ -2425,59 +2460,77 @@ const GRUPOS_DATA = [
       lucide.createIcons();
     }
 
-    function initDissertacoesChart() {
-      const ctx = document.getElementById('dissertacoesChart');
-      if (!ctx || typeof Chart === 'undefined') return;
+  
+function initDissertacoesChart() {
+  const ctx = document.getElementById('dissertacoesChart');
+  if (!ctx || typeof Chart === 'undefined') return;
 
-      new Chart(ctx, {
-        type: 'doughnut',
-        data: {
-          labels: [
-            'Mediação e Competência em Informação',
-            'Organização e Representação do Conhecimento',
-            'Gestão da Informação e Inovação',
-            'Comunicação Científica e Estudos Métricos',
-            'Memória e Preservação Digital'
-          ],
-          datasets: [{
-            data: [30, 26, 18, 14, 12],
-            backgroundColor: [
-              '#003366',
-              '#0055A5',
-              '#F2A900',
-              '#0D9488',
-              '#64748B'
-            ],
-            borderWidth: 2,
-            borderColor: '#FFFFFF',
-            hoverOffset: 8
-          }]
-        },
-        options: {
-          responsive: true,
-          maintainAspectRatio: false,
-          cutout: '62%',
-          plugins: {
-            legend: {
-              position: 'bottom',
-              labels: {
-                boxWidth: 11,
-                padding: 10,
-                font: { size: 11, family: 'Inter' },
-                color: '#334155'
-              }
+  const categorias = [
+    'Mediação e competência em informação',
+    'Tecnologias digitais e comunicação',
+    'Gestão da informação',
+    'Cultura e sociedade',
+    'Memória e desinformação'
+  ];
+
+  const total = DISSERTACOES_DESTAQUE.length;
+
+  const valores = categorias.map(tema =>
+    DISSERTACOES_DESTAQUE.filter(d => d.tema === tema).length
+  );
+
+  new Chart(ctx, {
+    type: 'doughnut',
+    data: {
+      labels: categorias,
+      datasets: [{
+        data: valores,
+        backgroundColor: [
+          '#003366',
+          '#0055A5',
+          '#F2A900',
+          '#0D9488',
+          '#64748B'
+        ],
+        borderWidth: 2,
+        borderColor: '#FFFFFF',
+        hoverOffset: 8
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      cutout: '62%',
+      plugins: {
+        legend: {
+          position: 'bottom',
+          labels: {
+            boxWidth: 11,
+            padding: 10,
+            font: {
+              size: 11,
+              family: 'Inter'
             },
-            tooltip: {
-              callbacks: {
-                label: function(context) {
-                  return ` ${context.label}: ~${context.parsed}% das produções`;
-                }
-              }
+            color: '#334155'
+          }
+        },
+        tooltip: {
+          callbacks: {
+            label: function(context) {
+              const quantidade = context.parsed;
+              const percentual = total
+                ? (quantidade / total * 100).toFixed(1)
+                : '0';
+
+              return ` ${context.label}: ${quantidade} (${percentual.replace('.', ',')}%)`;
             }
           }
         }
-      });
+      }
     }
+  });
+}
+
 
     // =========================================================================
     // 8. SEÇÃO 6: SIMULADOR INTERATIVO DA JORNADA DO MESTRANDO (24 MESES)
