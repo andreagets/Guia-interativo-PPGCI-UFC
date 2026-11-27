@@ -2001,44 +2001,92 @@ const DISSERTACOES_DESTAQUE = [
 ];
 
 
-    const SEMESTRES_JORNADA = [
+    
+const SEMESTRES_JORNADA = [
+  {
+    semestre: '1º Semestre',
+    periodo: 'Meses 1 a 6',
+    cor: 'bg-ufc-navy',
+    etapas: [
       {
-        semestre: '1º Semestre',
-        periodo: 'Meses 1 a 6',
-        cor: 'bg-ufc-navy',
-        etapas: [
-          { id: 's1-e1', titulo: 'Disciplinas Obrigatórias (Epistemologia e Metodologia)', creditos: 8, desc: 'Integralização dos 8 créditos obrigatórios iniciais.' },
-          { id: 's1-e2', titulo: 'Definição do Plano de Trabalho com Orientador(a)', creditos: 0, desc: 'Delimitação do escopo e cronograma da pesquisa.' }
-        ]
+        id: 's1-e1',
+        titulo: 'Fundamentos Teóricos e Epistemológicos e Metodologia da Pesquisa',
+        creditos: 8,
+        desc: 'Integralização de 8 créditos das disciplinas obrigatórias iniciais.'
       },
       {
-        semestre: '2º Semestre',
-        periodo: 'Meses 7 a 12',
-        cor: 'bg-ufc-royal',
-        etapas: [
-          { id: 's2-e1', titulo: 'Disciplinas Optativas da Linha de Pesquisa', creditos: 8, desc: 'Integralização dos 8 créditos optativos recomendados.' },
-          { id: 's2-e2', titulo: 'Comprovação de Proficiência em Língua Estrangeira', creditos: 0, desc: 'Aprovação em exame de proficiência reconhecido pelo PPGCI.' }
-        ]
-      },
-      {
-        semestre: '3º Semestre',
-        periodo: 'Meses 13 a 18',
-        cor: 'bg-amber-600',
-        etapas: [
-          { id: 's3-e1', titulo: 'Exame de Qualificação da Dissertação', creditos: 0, desc: 'Apresentação e arguição do projeto/resultados parciais perante banca.' },
-          { id: 's3-e2', titulo: 'Estágio de Docência na Graduação (DCINF/UFC)', creditos: 0, desc: 'Atuação supervisionada em disciplinas de graduação.' }
-        ]
-      },
-      {
-        semestre: '4º Semestre',
-        periodo: 'Meses 19 a 24',
-        cor: 'bg-emerald-700',
-        etapas: [
-          { id: 's4-e1', titulo: 'Redação Final e Submissão de Produção Científica', creditos: 4, desc: 'Elaboração de artigo em periódico/evento e escrita final.' },
-          { id: 's4-e2', titulo: 'Defesa Pública da Dissertação e Depósito no RI-UFC', creditos: 4, desc: 'Conclusão dos 8 créditos de dissertação e titulação de Mestre(a).' }
-        ]
+        id: 's1-e2',
+        titulo: 'Definição do Plano de Trabalho com Orientador(a)',
+        creditos: 0,
+        desc: 'Planejamento da pesquisa, delimitação do objeto e elaboração do cronograma.'
       }
-    ];
+    ]
+  },
+  {
+    semestre: '2º Semestre',
+    periodo: 'Meses 7 a 12',
+    cor: 'bg-ufc-royal',
+    etapas: [
+      {
+        id: 's2-e1',
+        titulo: 'Disciplinas Optativas',
+        creditos: 8,
+        desc: 'Integralização dos 8 créditos optativos, considerando o projeto de pesquisa e a orientação docente.'
+      },
+      {
+        id: 's2-e2',
+        titulo: 'Comprovação de Proficiência em Língua Inglesa',
+        creditos: 0,
+        desc: 'Comprovação da aprovação em exame de proficiência antes da qualificação.'
+      }
+    ]
+  },
+  {
+    semestre: '3º Semestre',
+    periodo: 'Meses 13 a 18',
+    cor: 'bg-amber-600',
+    etapas: [
+      {
+        id: 's3-e2',
+        titulo: 'Estágio de Docência I',
+        creditos: 4,
+        desc: 'Atividade obrigatória de intervenção pedagógica supervisionada na graduação.'
+      },
+      {
+        id: 's3-e3',
+        titulo: 'Integralização das Atividades Complementares',
+        creditos: 4,
+        desc: 'Cumprimento dos créditos de atividades complementares conforme regulamentação do PPGCI.'
+      },
+      {
+        id: 's3-e1',
+        titulo: 'Exame de Qualificação da Dissertação',
+        creditos: 0,
+        desc: 'Realização do exame após integralização dos créditos em disciplinas e atividades complementares e comprovação da proficiência, até o terceiro semestre.'
+      }
+    ]
+  },
+  {
+    semestre: '4º Semestre',
+    periodo: 'Meses 19 a 24',
+    cor: 'bg-emerald-700',
+    etapas: [
+      {
+        id: 's4-e1',
+        titulo: 'Conclusão da Pesquisa e Redação Final',
+        creditos: 0,
+        desc: 'Finalização da análise dos resultados, redação e revisão da dissertação.'
+      },
+      {
+        id: 's4-e2',
+        titulo: 'Defesa Pública da Dissertação e Depósito no RI-UFC',
+        creditos: 6,
+        desc: 'Defesa, aprovação, entrega da versão final e cumprimento dos procedimentos institucionais para titulação.'
+      }
+    ]
+  }
+];
+
 
     // =========================================================================
     // 2. ESTADO GLOBAL DA APLICAÇÃO
