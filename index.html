@@ -292,7 +292,7 @@
             <span class="text-xs font-medium text-blue-200">Pesquisa CNPq</span>
             <i data-lucide="network" class="w-4 h-4 text-ufc-gold"></i>
           </div>
-          <div class="text-xl sm:text-2xl font-display font-extrabold text-white">8 Grupos</div>
+          <div class="text-xl sm:text-2xl font-display font-extrabold text-white">7 Grupos</div>
           <div class="text-[11px] text-blue-100/80 mt-0.5">Grupos listados pelo PPGCI</div>
         </div>
 
@@ -2539,7 +2539,7 @@ const SEMESTRES_JORNADA = [
                   ${g.sigla}
                 </span>
                 <span class="px-2.5 py-0.5 rounded-full text-[11px] font-bold ${isL1 ? 'bg-ufc-light text-ufc-royal' : 'bg-amber-100 text-amber-800'}">
-                  ${isL1 ? 'Linha 1' : 'Linha 2'}
+                  ${g.linha === 'Ambas' ? 'Linhas 1 e 2' : isL1 ? 'Linha 1' : 'Linha 2'}
                 </span>
               </div>
               <h4 class="text-base font-bold text-ufc-navy leading-snug mb-2.5">
