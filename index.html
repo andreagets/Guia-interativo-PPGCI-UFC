@@ -1287,162 +1287,351 @@
     // 1. BASE DE DADOS ESTRUTURADA DO PPGCI - UFC (FONTES: ppgci.ufc.br)
     // =========================================================================
 
-    const DISCIPLINAS_DATA = [
-      {
-        id: 'PCI0001',
-        sigla: 'PCI-01',
-        nome: 'Epistemologia da Ciência da Informação',
-        creditos: 4,
-        cargaHoraria: '64h',
-        categoria: 'obrigatoria',
-        linha: 'Ambas',
-        tipoLabel: 'Obrigatória',
-        ementa: 'Fundamentos históricos, filosóficos e epistemológicos da Ciência da Informação. Paradigmas físico, cognitivo e social. Relações interdisciplinares e conceitos estruturantes: dado, informação, conhecimento e documento.'
-      },
-      {
-        id: 'PCI0002',
-        sigla: 'PCI-02',
-        nome: 'Metodologia da Pesquisa em Ciência da Informação',
-        creditos: 4,
-        cargaHoraria: '64h',
-        categoria: 'obrigatoria',
-        linha: 'Ambas',
-        tipoLabel: 'Obrigatória',
-        ementa: 'Construção do objeto de pesquisa em Ciência da Informação. Abordagens quantitativas, qualitativas e mistas. Métodos e técnicas de coleta e análise de dados. Ética na pesquisa e normalização científica.'
-      },
-      {
-        id: 'PCI0003',
-        sigla: 'PCI-03',
-        nome: 'Organização e Representação do Conhecimento',
-        creditos: 4,
-        cargaHoraria: '64h',
-        categoria: 'optativa-L1',
-        linha: 'L1',
-        tipoLabel: 'Optativa • Linha 1',
-        ementa: 'Teorias e sistemas de organização do conhecimento (SOC). Classificação, tesauros, taxonomias e ontologias. Modelagem conceitual e representação temática em ambientes analógicos e digitais.'
-      },
-      {
-        id: 'PCI0004',
-        sigla: 'PCI-04',
-        nome: 'Análise Documentária e Linguagens Documentárias',
-        creditos: 4,
-        cargaHoraria: '64h',
-        categoria: 'optativa-L1',
-        linha: 'L1',
-        tipoLabel: 'Optativa • Linha 1',
-        ementa: 'Processos de leitura documentária, condensação e indexação. Construção, avaliação e interoperabilidade de linguagens documentárias e vocabulários controlados.'
-      },
-      {
-        id: 'PCI0005',
-        sigla: 'PCI-05',
-        nome: 'Tecnologias Digitais, Dados Abertos e Recuperação da Informação',
-        creditos: 4,
-        cargaHoraria: '64h',
-        categoria: 'optativa-L1',
-        linha: 'L1',
-        tipoLabel: 'Optativa • Linha 1',
-        ementa: 'Arquitetura da informação, metadados, web semântica, dados abertos governamentais e científicos (Linked Open Data). Modelos e avaliação de sistemas de recuperação da informação.'
-      },
-      {
-        id: 'PCI0006',
-        sigla: 'PCI-06',
-        nome: 'Memória, Patrimônio e Preservação Digital',
-        creditos: 4,
-        cargaHoraria: '64h',
-        categoria: 'optativa-L1',
-        linha: 'L1',
-        tipoLabel: 'Optativa • Linha 1',
-        ementa: 'Relações entre informação, memória social e patrimônio documental. Políticas, padrões (OAIS) e estratégias de curadoria e preservação digital de longo prazo em arquivos, bibliotecas e museus.'
-      },
-      {
-        id: 'PCI0007',
-        sigla: 'PCI-07',
-        nome: 'Mediação da Informação e da Cultura',
-        creditos: 4,
-        cargaHoraria: '64h',
-        categoria: 'optativa-L2',
-        linha: 'L2',
-        tipoLabel: 'Optativa • Linha 2',
-        ementa: 'Fundamentos teóricos da mediação da informação e da mediação cultural. Apropriação simbólica, leitura, dispositivos culturais, protagonismo social e democratização do acesso ao conhecimento.'
-      },
-      {
-        id: 'PCI0008',
-        sigla: 'PCI-08',
-        nome: 'Gestão da Informação e do Conhecimento nas Organizações',
-        creditos: 4,
-        cargaHoraria: '64h',
-        categoria: 'optativa-L2',
-        linha: 'L2',
-        tipoLabel: 'Optativa • Linha 2',
-        ementa: 'Modelos e processos de gestão da informação e do conhecimento em organizações públicas e privadas. Fluxos informacionais, inteligência organizacional, cultura informacional e inovação.'
-      },
-      {
-        id: 'PCI0009',
-        sigla: 'PCI-09',
-        nome: 'Competência em Informação e Letramento Informacional',
-        creditos: 4,
-        cargaHoraria: '64h',
-        categoria: 'optativa-L2',
-        linha: 'L2',
-        tipoLabel: 'Optativa • Linha 2',
-        ementa: 'Concepções, padrões e indicadores de competência em informação (Information Literacy). Pensamento crítico, combate à desinformação, inclusão digital e cidadania.'
-      },
-      {
-        id: 'PCI0010',
-        sigla: 'PCI-10',
-        nome: 'Estudos Métricos da Informação (Bibliometria, Cientometria e Altmetria)',
-        creditos: 4,
-        cargaHoraria: '64h',
-        categoria: 'optativa-L2',
-        linha: 'L2',
-        tipoLabel: 'Optativa • Linha 2',
-        ementa: 'Leis bibliométricas, indicadores de produção, colaboração e impacto científico. Cientometria, informetria, webometria e altmetria aplicados à avaliação da ciência.'
-      },
-      {
-        id: 'PCI0011',
-        sigla: 'PCI-11',
-        nome: 'Políticas de Informação e Comunicação Científica',
-        creditos: 4,
-        cargaHoraria: '64h',
-        categoria: 'optativa-L2',
-        linha: 'L2',
-        tipoLabel: 'Optativa • Linha 2',
-        ementa: 'Regimes de informação e políticas públicas de ciência, tecnologia e inovação. Comunicação científica, acesso aberto, ciência aberta, periódicos científicos e repositórios.'
-      },
-      {
-        id: 'PCI0012',
-        sigla: 'PCI-12',
-        nome: 'Tópicos Especiais em Ciência da Informação',
-        creditos: 2,
-        cargaHoraria: '32h',
-        categoria: 'optativa-L1',
-        linha: 'Ambas',
-        tipoLabel: 'Optativa • Temática Variável',
-        ementa: 'Estudo aprofundado de temas emergentes e contemporâneos articulados às linhas de pesquisa do PPGCI, ministrado por docentes do programa ou professores visitantes.'
-      },
-      {
-        id: 'PCI0013',
-        sigla: 'SEM-01',
-        nome: 'Seminário de Pesquisa e Elaboração de Dissertação',
-        creditos: 8,
-        cargaHoraria: '128h',
-        categoria: 'atividade',
-        linha: 'Ambas',
-        tipoLabel: 'Atividade Obrigatória • Dissertação',
-        ementa: 'Acompanhamento sistemático do desenvolvimento do projeto de pesquisa, qualificação e redação final da dissertação sob orientação docente.'
-      },
-      {
-        id: 'PCI0014',
-        sigla: 'EST-01',
-        nome: 'Estágio de Docência no Ensino Superior',
-        creditos: 2,
-        cargaHoraria: '32h',
-        categoria: 'atividade',
-        linha: 'Ambas',
-        tipoLabel: 'Atividade Formativa',
-        ementa: 'Vivência supervisionada de planejamento, regência de aulas e avaliação em disciplinas de graduação do Departamento de Ciências da Informação (obrigatório para bolsistas).'
-      }
-    ];
+    
+const DISCIPLINAS_DATA = [
+  {
+    id: 'HIP0001',
+    sigla: 'HIP0001',
+    nome: 'Fundamentos Teóricos e Epistemológicos da Ciência da Informação',
+    creditos: 4,
+    cargaHoraria: '64h',
+    categoria: 'obrigatoria',
+    linha: 'Ambas',
+    tipoLabel: 'Obrigatória',
+    ementa: 'Fundamentos históricos e epistemológicos da Ciência da Informação, interdisciplinaridade, teorias, conceitos e métodos da área.'
+  },
+  {
+    id: 'HIP0002',
+    sigla: 'HIP0002',
+    nome: 'Metodologia da Pesquisa Científica em Ciência da Informação',
+    creditos: 4,
+    cargaHoraria: '64h',
+    categoria: 'obrigatoria',
+    linha: 'Ambas',
+    tipoLabel: 'Obrigatória',
+    ementa: 'Fundamentos da investigação científica, métodos de pesquisa, técnicas de coleta de dados, ética, bioética e elaboração de projetos.'
+  },
+  {
+    id: 'HIP0003',
+    sigla: 'HIP0003',
+    nome: 'Estágio de Docência I',
+    creditos: 4,
+    cargaHoraria: '64h',
+    categoria: 'obrigatoria',
+    linha: 'Ambas',
+    tipoLabel: 'Obrigatória',
+    ementa: 'Planejamento e execução de intervenção pedagógica na graduação em Biblioteconomia, sob supervisão docente.'
+  },
+  {
+    id: 'HIP0004',
+    sigla: 'HIP0004',
+    nome: 'Seminário de Pesquisa',
+    creditos: 4,
+    cargaHoraria: '64h',
+    categoria: 'atividade',
+    linha: 'Ambas',
+    tipoLabel: 'Componente transversal',
+    ementa: 'Discussão e acompanhamento dos projetos de dissertação, com preparação para qualificação e defesa.'
+  },
+  {
+    id: 'HIP0005',
+    sigla: 'HIP0005',
+    nome: 'Tópicos Especiais',
+    creditos: 4,
+    cargaHoraria: '64h',
+    categoria: 'atividade',
+    linha: 'Ambas',
+    tipoLabel: 'Componente transversal',
+    ementa: 'Temáticas contemporâneas e interdisciplinares da Ciência da Informação.'
+  },
+  {
+    id: 'HIP0006',
+    sigla: 'HIP0006',
+    nome: 'Arquitetura da Informação',
+    creditos: 4,
+    cargaHoraria: '64h',
+    categoria: 'optativa-L1',
+    linha: 'L1',
+    tipoLabel: 'Optativa • Afinidade com Linha 1',
+    ementa: 'Fundamentos, desenvolvimento e avaliação da arquitetura da informação em sistemas de recuperação e ambientes web.'
+  },
+  {
+    id: 'HIP0007',
+    sigla: 'HIP0007',
+    nome: 'Linguagem Documentária, Representação e Comunicação da Informação',
+    creditos: 4,
+    cargaHoraria: '64h',
+    categoria: 'optativa-L1',
+    linha: 'L1',
+    tipoLabel: 'Optativa • Afinidade com Linha 1',
+    ementa: 'Instrumentos terminológicos, linguagens documentárias, organização e recuperação informacional, incluindo elaboração de tesauros.'
+  },
+  {
+    id: 'HIP0008',
+    sigla: 'HIP0008',
+    nome: 'Política de Indexação da Informação',
+    creditos: 4,
+    cargaHoraria: '64h',
+    categoria: 'optativa-L1',
+    linha: 'L1',
+    tipoLabel: 'Optativa • Afinidade com Linha 1',
+    ementa: 'Planejamento, implementação e avaliação de políticas de indexação em unidades e sistemas de informação.'
+  },
+  {
+    id: 'HIP0009',
+    sigla: 'HIP0009',
+    nome: 'Representação da Informação e do Conhecimento',
+    creditos: 4,
+    cargaHoraria: '64h',
+    categoria: 'optativa-L1',
+    linha: 'L1',
+    tipoLabel: 'Optativa • Afinidade com Linha 1',
+    ementa: 'Modelagem conceitual, representação temática e descritiva, redes semânticas, mapas conceituais, taxonomias e ontologias.'
+  },
+  {
+    id: 'HIP0010',
+    sigla: 'HIP0010',
+    nome: 'Sistemas de Informação na Gestão do Conhecimento',
+    creditos: 4,
+    cargaHoraria: '64h',
+    categoria: 'optativa-L1',
+    linha: 'L1',
+    tipoLabel: 'Optativa • Afinidade com Linha 1',
+    ementa: 'Sistemas informacionais, gerenciamento de dados, segurança, tecnologias emergentes e apoio à gestão do conhecimento e à tomada de decisão.'
+  },
+  {
+    id: 'HIP0011',
+    sigla: 'HIP0011',
+    nome: 'Tecnologias da Informação para a Área da Saúde',
+    creditos: 4,
+    cargaHoraria: '64h',
+    categoria: 'optativa-L1',
+    linha: 'L1',
+    tipoLabel: 'Optativa • Afinidade com Linha 1',
+    ementa: 'Informação em saúde, políticas, tecnologias, sistemas informacionais, documentação, padrões, metadados, curadoria e preservação digital.'
+  },
+  {
+    id: 'HIP0014',
+    sigla: 'HIP0014',
+    nome: 'Tecnologias da Informação e Inclusão Social e Digital',
+    creditos: 4,
+    cargaHoraria: '64h',
+    categoria: 'optativa-L1',
+    linha: 'L1',
+    tipoLabel: 'Optativa • Afinidade com Linha 1',
+    ementa: 'Inclusão e letramento digital, tecnologias educacionais, software livre, ambientes virtuais, EaD e aprendizagem colaborativa.'
+  },
+  {
+    id: 'HIP0015',
+    sigla: 'HIP0015',
+    nome: 'Cultura e Mediação da Informação',
+    creditos: 4,
+    cargaHoraria: '64h',
+    categoria: 'optativa-L2',
+    linha: 'L2',
+    tipoLabel: 'Optativa • Afinidade com Linha 2',
+    ementa: 'Fundamentos das mediações culturais e informacionais, apropriação, interpretação e ressignificação da informação.'
+  },
+  {
+    id: 'HIP0016',
+    sigla: 'HIP0016',
+    nome: 'Competência em Informação, Criatividade e Ensino Superior',
+    creditos: 4,
+    cargaHoraria: '64h',
+    categoria: 'optativa-L2',
+    linha: 'L2',
+    tipoLabel: 'Optativa • Afinidade com Linha 2',
+    ementa: 'Competências informacionais, criatividade, construção do conhecimento e aprendizagem no ensino superior.'
+  },
+  {
+    id: 'HIP0017',
+    sigla: 'HIP0017',
+    nome: 'Gestão da Informação e do Conhecimento',
+    creditos: 4,
+    cargaHoraria: '64h',
+    categoria: 'optativa-L2',
+    linha: 'L2',
+    tipoLabel: 'Optativa • Afinidade com Linha 2',
+    ementa: 'Criação, gestão e compartilhamento do conhecimento nas organizações, cultura e comportamento informacional.'
+  },
+  {
+    id: 'HIP0018',
+    sigla: 'HIP0018',
+    nome: 'Informação Social e Cultura Informacional',
+    creditos: 4,
+    cargaHoraria: '64h',
+    categoria: 'optativa-L2',
+    linha: 'L2',
+    tipoLabel: 'Optativa • Afinidade com Linha 2',
+    ementa: 'Informação social, desenvolvimento cultural, cidadania, sustentabilidade e competências informacionais.'
+  },
+  {
+    id: 'HIP0019',
+    sigla: 'HIP0019',
+    nome: 'Informação para a Mídia: Processos e Mediações Culturais na Construção de Realidades Contemporâneas',
+    creditos: 4,
+    cargaHoraria: '64h',
+    categoria: 'optativa-L2',
+    linha: 'L2',
+    tipoLabel: 'Optativa • Afinidade com Linha 2',
+    ementa: 'Relações entre mídia, cultura e informação, circulação dos conteúdos e construção simbólica das realidades contemporâneas.'
+  },
+  {
+    id: 'HIP0020',
+    sigla: 'HIP0020',
+    nome: 'Mediação e Competência em Informação nos Ambientes de Informação',
+    creditos: 4,
+    cargaHoraria: '64h',
+    categoria: 'optativa-L2',
+    linha: 'L2',
+    tipoLabel: 'Optativa • Afinidade com Linha 2',
+    ementa: 'Mediação, desenvolvimento de competências informacionais, práticas educativas, apropriação do conhecimento e protagonismo social.'
+  },
+  {
+    id: 'HIP0021',
+    sigla: 'HIP0021',
+    nome: 'Práticas Informacionais, Mediação e Etnografia',
+    creditos: 4,
+    cargaHoraria: '64h',
+    categoria: 'optativa-L2',
+    linha: 'L2',
+    tipoLabel: 'Optativa • Afinidade com Linha 2',
+    ementa: 'Práticas informacionais em contextos sociais e culturais, mediação tecnológica e métodos etnográficos.'
+  },
+  {
+    id: 'HIP0022',
+    sigla: 'HIP0022',
+    nome: 'Sociologia da Informação',
+    creditos: 4,
+    cargaHoraria: '64h',
+    categoria: 'optativa-L2',
+    linha: 'L2',
+    tipoLabel: 'Optativa • Afinidade com Linha 2',
+    ementa: 'Dimensões sociais, culturais, econômicas e ideológicas da informação, identidades, subjetividades e sociabilidades.'
+  },
+  {
+    id: 'HIP0023',
+    sigla: 'HIP0023',
+    nome: 'Usuários da Informação',
+    creditos: 4,
+    cargaHoraria: '64h',
+    categoria: 'optativa-L2',
+    linha: 'L2',
+    tipoLabel: 'Optativa • Afinidade com Linha 2',
+    ementa: 'Necessidades, busca, uso e apropriação da informação, estudos de usuários e planejamento de serviços informacionais.'
+  },
+  {
+    id: 'HIP0024',
+    sigla: 'HIP0024',
+    nome: 'Sociedade e Ciência da Informação no Brasil',
+    creditos: 4,
+    cargaHoraria: '64h',
+    categoria: 'optativa-L2',
+    linha: 'L2',
+    tipoLabel: 'Optativa • Afinidade com Linha 2',
+    ementa: 'Contexto histórico, político, econômico e cultural brasileiro, políticas informacionais e formação dos profissionais da informação.'
+  },
+  {
+    id: 'HIP0029',
+    sigla: 'HIP0029',
+    nome: 'Políticas Públicas de Informação',
+    creditos: 4,
+    cargaHoraria: '64h',
+    categoria: 'optativa-L2',
+    linha: 'L2',
+    tipoLabel: 'Optativa • Afinidade com Linha 2',
+    ementa: 'Formulação, implementação e avaliação de políticas públicas de informação, democratização do acesso e governança informacional.'
+  },
+  {
+    id: 'HIP0030',
+    sigla: 'HIP0030',
+    nome: 'Análise da Interação em Ambientes Virtuais',
+    creditos: 4,
+    cargaHoraria: '64h',
+    categoria: 'optativa-L1',
+    linha: 'L1',
+    tipoLabel: 'Optativa • Afinidade com Linha 1',
+    ementa: 'Interações mediadas por tecnologias digitais, aprendizagem, aspectos cognitivos e linguísticos, sistemas categoriais e etnografia interacional.'
+  },
+  {
+    id: 'HIP0032',
+    sigla: 'HIP0032',
+    nome: 'Gestão da Informação Científica e Tecnologia',
+    creditos: 4,
+    cargaHoraria: '64h',
+    categoria: 'optativa-L1',
+    linha: 'L1',
+    tipoLabel: 'Optativa • Afinidade com Linha 1',
+    ementa: 'Gestão, divulgação, acesso aberto, monitoramento e avaliação da informação científica e tecnológica.'
+  },
+  {
+    id: 'HIP0034',
+    sigla: 'HIP0034',
+    nome: 'Taxonomias e Ontologias como Instrumentos Terminológicos de Representação e Recuperação da Informação',
+    creditos: 4,
+    cargaHoraria: '64h',
+    categoria: 'optativa-L1',
+    linha: 'L1',
+    tipoLabel: 'Optativa • Afinidade com Linha 1',
+    ementa: 'Princípios teóricos e metodológicos para desenvolvimento de taxonomias e ontologias destinadas à organização, representação e recuperação informacional.'
+  },
+  {
+    id: 'HIP0036',
+    sigla: 'HIP0036',
+    nome: 'Comunicação Científica',
+    creditos: 4,
+    cargaHoraria: '64h',
+    categoria: 'optativa-L1',
+    linha: 'L1',
+    tipoLabel: 'Optativa • Afinidade com Linha 1',
+    ementa: 'Comunicação e divulgação científica, canais de publicação, processos editoriais, avaliação por pares, acesso aberto e transformação digital da ciência.'
+  },
+  {
+    id: 'HIP0027',
+    sigla: 'HIP0027',
+    nome: 'Qualificação',
+    creditos: 1,
+    cargaHoraria: '16h',
+    categoria: 'atividade',
+    linha: 'Ambas',
+    tipoLabel: 'Atividade obrigatória',
+    ementa: 'Avaliação do desenvolvimento da pesquisa por meio de exame de qualificação.'
+  },
+  {
+    id: 'HIP0028',
+    sigla: 'HIP0028',
+    nome: 'Proficiência',
+    creditos: 1,
+    cargaHoraria: '16h',
+    categoria: 'atividade',
+    linha: 'Ambas',
+    tipoLabel: 'Atividade obrigatória',
+    ementa: 'Comprovação de proficiência conforme as exigências institucionais.'
+  },
+  {
+    id: 'HIP0000',
+    sigla: 'HIP0000',
+    nome: 'Dissertação',
+    creditos: 6,
+    cargaHoraria: '96h',
+    categoria: 'atividade',
+    linha: 'Ambas',
+    tipoLabel: 'Atividade obrigatória',
+    ementa: 'Desenvolvimento, conclusão e defesa da pesquisa de mestrado.'
+  },
+  {
+    id: 'HIP0035',
+    sigla: 'HIP0035',
+    nome: 'Atividades Complementares',
+    creditos: 4,
+    cargaHoraria: '64h',
+    categoria: 'atividade',
+    linha: 'Ambas',
+    tipoLabel: 'Atividade obrigatória',
+    ementa: 'Integralização das atividades complementares conforme regulamentação do programa.'
+  }
+];
+
 
   const DOCENTES_DATA = [
   {
@@ -1638,13 +1827,6 @@ const GRUPOS_DATA = [
     linha: 'Ambas',
     foco: 'Competência em informação, comunicação científica, mediação, divulgação científica e desenvolvimento de competências em ambientes informacionais.',
     lideranca: 'Maria Giovanna Guedes Farias e Gabriela Belmont de Farias'
-  },
-  {
-    sigla: 'GRETICS',
-    nome: 'Grupo de Pesquisa em Etnografia Interacional e Tecnologias Digitais',
-    linha: 'L1',
-    foco: 'Etnografia interacional, tecnologias digitais, processos comunicacionais, interação e aprendizagem em ambientes virtuais.',
-    lideranca: 'Priscila Barros David'
   },
   {
     sigla: 'CULTURA',
