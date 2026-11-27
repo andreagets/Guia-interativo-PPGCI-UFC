@@ -1,0 +1,441 @@
+{
+  "programa": "PPGCI/UFC",
+  "atualizacao": "2026-11-27",
+  "cobertura": "2018-2024",
+  "totais": {
+    "registros_unicos": 70,
+    "linha_1": 23,
+    "linha_2": 38,
+    "nao_informada": 9,
+    "orientadores_distintos": 13,
+    "projetos_associados": 38,
+    "tempo_medio_meses": 28.2,
+    "tempo_mediano_meses": 25.1,
+    "percentual_url_texto_completo": 100.0
+  },
+  "distribuicao_anual": [
+    {
+      "ano": 2018,
+      "linha_1": 5,
+      "linha_2": 10,
+      "nao_informada": 0,
+      "total": 15,
+      "acumulado": 15
+    },
+    {
+      "ano": 2019,
+      "linha_1": 5,
+      "linha_2": 4,
+      "nao_informada": 0,
+      "total": 9,
+      "acumulado": 24
+    },
+    {
+      "ano": 2020,
+      "linha_1": 3,
+      "linha_2": 4,
+      "nao_informada": 0,
+      "total": 7,
+      "acumulado": 31
+    },
+    {
+      "ano": 2021,
+      "linha_1": 1,
+      "linha_2": 2,
+      "nao_informada": 6,
+      "total": 9,
+      "acumulado": 40
+    },
+    {
+      "ano": 2022,
+      "linha_1": 2,
+      "linha_2": 1,
+      "nao_informada": 0,
+      "total": 3,
+      "acumulado": 43
+    },
+    {
+      "ano": 2023,
+      "linha_1": 4,
+      "linha_2": 6,
+      "nao_informada": 3,
+      "total": 13,
+      "acumulado": 56
+    },
+    {
+      "ano": 2024,
+      "linha_1": 3,
+      "linha_2": 11,
+      "nao_informada": 0,
+      "total": 14,
+      "acumulado": 70
+    }
+  ],
+  "distribuicao_por_linha": [
+    {
+      "linha": "Linha 1",
+      "total": 23
+    },
+    {
+      "linha": "Linha 2",
+      "total": 38
+    },
+    {
+      "linha": "Não informada",
+      "total": 9
+    }
+  ],
+  "distribuicao_por_orientador": [
+    {
+      "orientador": "JEFFERSON VERAS NUNES",
+      "total": 8
+    },
+    {
+      "orientador": "LIDIA EUGENIA CAVALCANTE LIMA",
+      "total": 8
+    },
+    {
+      "orientador": "ANDREA SOARES ROCHA DA SILVA",
+      "total": 7
+    },
+    {
+      "orientador": "LUIZ TADEU FEITOSA",
+      "total": 7
+    },
+    {
+      "orientador": "GABRIELA BELMONT DE FARIAS",
+      "total": 6
+    },
+    {
+      "orientador": "HELIOMAR CAVATI SOBRINHO",
+      "total": 6
+    },
+    {
+      "orientador": "MARIA GIOVANNA GUEDES FARIAS",
+      "total": 6
+    },
+    {
+      "orientador": "OSVALDO DE SOUZA",
+      "total": 6
+    },
+    {
+      "orientador": "MARIA DE FATIMA OLIVEIRA COSTA",
+      "total": 5
+    },
+    {
+      "orientador": "VIRGINIA BENTES PINTO",
+      "total": 5
+    },
+    {
+      "orientador": "PRISCILA BARROS DAVID",
+      "total": 3
+    },
+    {
+      "orientador": "THICIANE MARY CARVALHO TEIXEIRA",
+      "total": 2
+    },
+    {
+      "orientador": "MARIA AUREA MONTENEGRO ALBUQUERQUE GUERRA",
+      "total": 1
+    }
+  ],
+  "distribuicao_por_projeto": [
+    {
+      "projeto": "A INOVAÇÃO TECNOLÓGICA DO MODELO METODOLÓGICO INTEGRADO PARA CONSTRUÇÃO DE LINGUAGENS DOCUMENTÁRIAS, APLICADO NA FORMAÇÃO DISCENTE DO CURSO DE BIBLIOTECONOMIA DA UNIVERSIDADE FEDERAL DO CEARÁ",
+      "id_projeto": 385525,
+      "total": 4
+    },
+    {
+      "projeto": "COMPROMETIMENTO SOCIAL E MEDIAÇÃO DA INFORMAÇÃO",
+      "id_projeto": 463173,
+      "total": 3
+    },
+    {
+      "projeto": "CONTRIBUIÇÕES DA TEORIA DA PRÁTICA E DA ETNOMETODOLOGIA AO CONCEITO DE PRÁTICAS INFORMACIONAIS",
+      "id_projeto": 463379,
+      "total": 3
+    },
+    {
+      "projeto": "CULTURA E MEDIAÇÃO CULTURAL",
+      "id_projeto": 725099,
+      "total": 3
+    },
+    {
+      "projeto": "PRÁTICAS E DISCURSOS EM MÍDIAS SOCIAIS: UM ABORDAGEM A PARTIR DA TEORIA ATOR-REDE",
+      "id_projeto": 764222,
+      "total": 3
+    },
+    {
+      "projeto": "REVIEW - TECNOLOGIAS ASSISTIVAS. TÍTULO ATUALIZADO (PESQUISA E DESENVOLVIMENTO DE APLICAÇÕES ASSISTIVAS)",
+      "id_projeto": 398231,
+      "total": 3
+    },
+    {
+      "projeto": "A MEDIAÇÃO DA INFORMAÇÃO NOS ESTUDOS DE USUÁRIOS DAS BIBLIOTECAS UNIVERSITÁRIAS",
+      "id_projeto": 398202,
+      "total": 2
+    },
+    {
+      "projeto": "COMPETÊNCIA EM INFORMAÇÃO E MIDIÁTICA DOS GRUPOS DE PESQUISA DA CIÊNCIA DA INFORMAÇÃO",
+      "id_projeto": 648566,
+      "total": 2
+    },
+    {
+      "projeto": "COMUNICAÇÃO CIENTÍFICA: CANAIS, MEDIAÇÃO DO BIBLIOTECÁRIO E IMPACTOS NO DESENVOLVIMENTO DA CIÊNCIA E DA SOCIEDADE",
+      "id_projeto": 522543,
+      "total": 2
+    },
+    {
+      "projeto": "DOCUMENTO, MEMÓRIA E INFORMAÇÃO: O ACERVO DE MARIA DA CONCEIÇÃO DE SOUSA E A HISTÓRIA DA BIBLIOTECONOMIA NO CEARÁ",
+      "id_projeto": 765207,
+      "total": 2
+    },
+    {
+      "projeto": "IMPLICAÇÕES DA ARQUITETURA DA INFORMAÇÃO NO ESFORÇO COGNITIVO NO USO DE SISTEMAS DE RECUPERAÇÃO DA INFORMAÇÃO",
+      "id_projeto": 463422,
+      "total": 2
+    },
+    {
+      "projeto": "M-LEARNING E SUAS POTENCIALIDADES EM AÇÕES DE ENSINO E APRENDIZAGEM NA ÁREA DA SAÚDE: TECNOLOGIAS, ESTRATÉGIAS E COMPETÊNCIAS",
+      "id_projeto": 498999,
+      "total": 2
+    },
+    {
+      "projeto": "MEDIANDO INFORMAÇÕES EM PROL DO DESENVOLVIMENTO DE COMPETÊNCIAS NO SETOR DE REFERÊNCIA DE BIBLIOTECAS UNIVERSITÁRIAS",
+      "id_projeto": 463373,
+      "total": 2
+    },
+    {
+      "projeto": "PERCEPÇÃO DA DIVULGAÇÃO E POPULARIZAÇÃO DA CIÊNCIA: UM OLHAR SOBRE O PROTÓTIPO OBSERVAUFC",
+      "id_projeto": 725146,
+      "total": 2
+    },
+    {
+      "projeto": "TELEMONITORAMENTO EM AULAS PRÁTICAS: ESTRATÉGIAS DIDÁTICAS E REQUISITOS FUNCIONAIS PARA O DESENVOLVIMENTO E A APLICAÇÃO DE UM SOFTWARE DE APOIO",
+      "id_projeto": 692408,
+      "total": 2
+    },
+    {
+      "projeto": "A GESTÃO DA INFORMAÇÃO E DO CONHECIMENTO EM AMBIENTES EDUCACIONAIS",
+      "id_projeto": 725142,
+      "total": 1
+    },
+    {
+      "projeto": "A REPRESENTAÇÃO DOCUMENTÁRIA DO DOMÍNIO DA SAÚDE: ANÁLISE DA DOCUMENTAÇÃO SANITÁRIA EM HOSPITAIS DA REDE PÚBLICA DE FORTALEZA",
+      "id_projeto": 397656,
+      "total": 1
+    },
+    {
+      "projeto": "ANÁLISE DE DOMÍNIO APLICADA A REPRESENTAÇÃO DO CONHECIMENTO VISANDO A PRESERVAÇÃO DIGITAL DE PRONTUÁRIO ELETRÔNICO DO PACIENTE (ADCPEP)ANÁLISE DE DOMÍNIO APLICADA A REPRESENTAÇÃO DO CONHECIMENTO VISANDO A PRESERVAÇÃO DIGITAL DE PRONTUÁRIO ELETRÔNICO",
+      "id_projeto": 463326,
+      "total": 1
+    },
+    {
+      "projeto": "AS CONTRIBUIÇÕES DA CIÊNCIA DA INFORMAÇÃO NO CEARÁ PARA A PÓS-GRADUAÇÃO BRASILEIRA - 2ª PARTE",
+      "id_projeto": 764282,
+      "total": 1
+    },
+    {
+      "projeto": "CLASSIFICAÇÃO DE TEXTOS PARA IDENTIFICAÇÃO DE DESINFORMAÇÃO",
+      "id_projeto": 807406,
+      "total": 1
+    },
+    {
+      "projeto": "COMUNICAÇÃO E DIVULGAÇÃO DA CIÊNCIA: ANÁLISE DAS COMPETÊNCIAS INFOCOMUNICACIONAIS DOS GRUPOS DE PESQUISA DO CEARÁ",
+      "id_projeto": 807411,
+      "total": 1
+    },
+    {
+      "projeto": "CONSTRUÇÃO DE UM VOCABULÁRIO ELETRÔNICO DE NOMES POPULARES DAS DOENÇAS: CONTRIBUIÇÕES PARA A ORGANIZAÇÃO, REPRESENTAÇÃO, RECUPERAÇÃO E PRESERVAÇÃO DE CONHECIMENTOS",
+      "id_projeto": 398197,
+      "total": 1
+    },
+    {
+      "projeto": "CULTURA E MÍDIA: ESTUDO DAS COMPLEXIDADES MEDIATIVAS NAS NOVAS REALIDADES CONTEMPORÂNEAS",
+      "id_projeto": 499001,
+      "total": 1
+    },
+    {
+      "projeto": "CULTURA INFORMACIONAL: PROCESSOS DE MEDIAÇÕES INFORMACIONAIS NAS PRÁTICAS CULTURAIS CONTEMPORÂNEAS",
+      "id_projeto": 463354,
+      "total": 1
+    },
+    {
+      "projeto": "DESENVOLVIMENTO E VALIDAÇÃO DE UM POCKET GUIDE SOBRE METODOLOGIA CIENTÍFICA PARA ALUNOS DE GRADUAÇÃO DA ÁREA DA SAÚDE EM FORMATO DE APLICATIVO MÓVEL",
+      "id_projeto": 564867,
+      "total": 1
+    },
+    {
+      "projeto": "HABILIDADES INFORMACIONAIS E MIDIÁTICAS DOS GRUPOS DE PESQUISA DA UFC",
+      "id_projeto": 728040,
+      "total": 1
+    },
+    {
+      "projeto": "LITERACIA EM SAÚDE: MEDIAÇÃO DA INFORMAÇÃO NO CONTEXTO COMUNITÁRIO",
+      "id_projeto": 725131,
+      "total": 1
+    },
+    {
+      "projeto": "LITERACIA INFORMACIONAL COMUNITÁRIA EM SAÚDE",
+      "id_projeto": 699038,
+      "total": 1
+    },
+    {
+      "projeto": "MEDIAÇÃO DA INFORMAÇÃO E EDUCAÇÃO PATRIMONIAL EM CONTEXTOS DIGITAIS",
+      "id_projeto": 526329,
+      "total": 1
+    },
+    {
+      "projeto": "MEMÓRIA INSTITUCIONAL E PATRIMÔNIO DOCUMENTAL: CAMINHOS TRILHADOS PARA O ENSINO SUPERIOR NO CEARÁ ATRAVÉS DAS COLEÇÕES PESSOAIS",
+      "id_projeto": 765191,
+      "total": 1
+    },
+    {
+      "projeto": "MODELIZAÇÃO SINTAGMÁTICA PARA REPRESENTAÇÃO INDEXAL EM RESUMOS DE ALTAS DE PRONTUÁRIO DO PACIENTE (MOSRINRAP) SYNTAGMATIC MODELING FOR THE REPRESENTATION OF INFORMATION IN DISCHARGE SUMMARY OF THE PATIENT'S RECORD (MOSRINRAP)",
+      "id_projeto": 463278,
+      "total": 1
+    },
+    {
+      "projeto": "O DESIGN DA INFORMAÇÃO NA PLATAFORMA GOOGLE CLASSROOM: UMA ANÁLISE DAS FERRAMENTAS DE INTERAÇÃO À LUZ DA ETNOGRAFIA INTERACIONAL",
+      "id_projeto": 692395,
+      "total": 1
+    },
+    {
+      "projeto": "OS CONCEITOS DE ESTUDOS DE USUÁRIOS NA VISÃO DOS PROFESSORES DOS CURSOS DE BIBLIOTECONOMIA DO BRASIL",
+      "id_projeto": 385524,
+      "total": 1
+    },
+    {
+      "projeto": "PARA ALÉM DO TEMPO DE TELA: UM ESTUDO ELUCIDATIVO SOBRE USO DE TECNOLOGIAS DIGITAIS NA PRIMEIRA INFÂNCIA E UMA RESPOSTA CIENTÍFICA E ORIENTADORA À SOCIEDADE",
+      "id_projeto": 765813,
+      "total": 1
+    },
+    {
+      "projeto": "PERCEPÇÕES DO VALOR DA INFORMAÇÃO: A IMPORTÂNCIA AA GESTÃO AA INFORMAÇÃO E DO CONHECIMENTO EM AMBIENTES EMPRESARIAIS",
+      "id_projeto": 385561,
+      "total": 1
+    },
+    {
+      "projeto": "PRÁTICAS INFORMACIONAIS: LEVANTAMENTO TEÓRICO-METODOLÓGICO ACERCA DO MODELO DE MARY ANN HARLAN",
+      "id_projeto": 648559,
+      "total": 1
+    },
+    {
+      "projeto": "REPOSITÓRIOS INSTITUCIONAIS DE ACESSO ABERTO: GESTÃO E VISIBILIDADE DA INFORMAÇÃO CIENTÍFICA",
+      "id_projeto": 398235,
+      "total": 1
+    },
+    {
+      "projeto": "REPRESENTAÇÃO DA INTERAÇÃO EM FÓRUNS ONLINE PARA A INVESTIGAÇÃO DE CONTEXTOS DE APRENDIZAGEM: UM ESTUDO ETNOGRÁFICO",
+      "id_projeto": 468611,
+      "total": 1
+    }
+  ],
+  "completude_metadados": [
+    {
+      "metadado": "Título",
+      "campo_capes": "NM_PRODUCAO",
+      "preenchidos": 70,
+      "ausentes": 0,
+      "percentual": 100.0
+    },
+    {
+      "metadado": "Autoria",
+      "campo_capes": "NM_DISCENTE",
+      "preenchidos": 70,
+      "ausentes": 0,
+      "percentual": 100.0
+    },
+    {
+      "metadado": "Orientação",
+      "campo_capes": "NM_ORIENTADOR",
+      "preenchidos": 70,
+      "ausentes": 0,
+      "percentual": 100.0
+    },
+    {
+      "metadado": "Linha de pesquisa",
+      "campo_capes": "NM_LINHA_PESQUISA",
+      "preenchidos": 61,
+      "ausentes": 9,
+      "percentual": 87.1
+    },
+    {
+      "metadado": "Projeto de pesquisa",
+      "campo_capes": "NM_PROJETO",
+      "preenchidos": 60,
+      "ausentes": 10,
+      "percentual": 85.7
+    },
+    {
+      "metadado": "Área de concentração",
+      "campo_capes": "NM_AREA_CONCENTRACAO",
+      "preenchidos": 61,
+      "ausentes": 9,
+      "percentual": 87.1
+    },
+    {
+      "metadado": "Data de matrícula",
+      "campo_capes": "DT_MATRICULA",
+      "preenchidos": 70,
+      "ausentes": 0,
+      "percentual": 100.0
+    },
+    {
+      "metadado": "Data de titulação",
+      "campo_capes": "DT_TITULACAO",
+      "preenchidos": 70,
+      "ausentes": 0,
+      "percentual": 100.0
+    },
+    {
+      "metadado": "Resumo",
+      "campo_capes": "DS_RESUMO",
+      "preenchidos": 70,
+      "ausentes": 0,
+      "percentual": 100.0
+    },
+    {
+      "metadado": "Abstract",
+      "campo_capes": "DS_ABSTRACT",
+      "preenchidos": 70,
+      "ausentes": 0,
+      "percentual": 100.0
+    },
+    {
+      "metadado": "Palavras-chave",
+      "campo_capes": "DS_PALAVRA_CHAVE",
+      "preenchidos": 70,
+      "ausentes": 0,
+      "percentual": 100.0
+    },
+    {
+      "metadado": "Keywords",
+      "campo_capes": "DS_KEYWORD",
+      "preenchidos": 70,
+      "ausentes": 0,
+      "percentual": 100.0
+    },
+    {
+      "metadado": "Número de páginas",
+      "campo_capes": "NR_PAGINAS",
+      "preenchidos": 70,
+      "ausentes": 0,
+      "percentual": 100.0
+    },
+    {
+      "metadado": "Idioma",
+      "campo_capes": "NM_IDIOMA",
+      "preenchidos": 70,
+      "ausentes": 0,
+      "percentual": 100.0
+    },
+    {
+      "metadado": "URL do texto completo",
+      "campo_capes": "DS_URL_TEXTO_COMPLETO",
+      "preenchidos": 70,
+      "ausentes": 0,
+      "percentual": 100.0
+    }
+  ]
+}
