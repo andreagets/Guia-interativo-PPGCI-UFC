@@ -2165,7 +2165,11 @@ const GRUPOS_DATA = [
     // =========================================================================
     function renderGrupos() {
       const grid = document.getElementById('grupos-grid');
-      const filtrados = GRUPOS_DATA.filter(g => state.globalLinha === 'all' || g.linha === state.globalLinha);
+    const filtrados = GRUPOS_DATA.filter(g =>
+      state.globalLinha === 'all' ||
+      g.linha === state.globalLinha ||
+      g.linha === 'Ambas'
+    );
 
       grid.innerHTML = filtrados.map(g => {
         const isL1 = g.linha === 'L1';
