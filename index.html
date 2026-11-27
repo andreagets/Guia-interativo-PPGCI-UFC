@@ -1136,14 +1136,14 @@
             <div class="bg-white/10 border border-white/15 rounded-xl p-4 text-center">
               <div class="text-xs text-blue-200 mb-1">Créditos Integralizados</div>
               <div class="text-2xl font-display font-extrabold text-ufc-gold">
-                <span id="sim-creditos-atual">0</span> <span class="text-sm font-normal text-white/70">/ 24</span>
+                <span id="sim-creditos-atual">0</span> <span class="text-sm font-normal text-white/70">/ 30</span>
               </div>
-              <div class="text-[11px] text-blue-100/80 mt-0.5"><span id="sim-horas-atual">0</span>h de 384h</div>
+              <div class="text-[11px] text-blue-100/80 mt-0.5"><span id="sim-horas-atual">0</span>h de 480h</div>
             </div>
             <div class="bg-white/10 border border-white/15 rounded-xl p-4 text-center">
               <div class="text-xs text-blue-200 mb-1">Marcos Concluídos</div>
               <div class="text-2xl font-display font-extrabold text-emerald-300">
-                <span id="sim-marcos-atual">0</span> <span class="text-sm font-normal text-white/70">/ 8</span>
+                <span id="sim-marcos-atual">0</span> <span class="text-sm font-normal text-white/70">/ 9</span>
               </div>
               <div class="text-[11px] text-blue-100/80 mt-0.5">Requisitos regimentais</div>
             </div>
@@ -2712,38 +2712,67 @@ function initDissertacoesChart() {
       renderSimulador();
     }
 
-    function updateSimuladorMetrics() {
-      let totalCreditos = 0;
-      let totalMarcos = 0;
-      const totalMarcosPossiveis = 8;
+    
+function updateSimuladorMetrics() {
+  let totalCreditos = 0;
+  let totalMarcos = 0;
 
-      SEMESTRES_JORNADA.forEach(sem => {
-        sem.etapas.forEach(et => {
-          if (state.etapasConcluidas.has(et.id)) {
-            totalCreditos += et.creditos;
-            totalMarcos += 1;
-          }
-        });
-      });
+  const totalMarcosPossiveis = SEMESTRES_JORNADA.reduce(
+    (total, sem) => total + sem.etapas.length, 0
+  );
 
-      const percent = Math.round((totalMarcos / totalMarcosPossiveis) * 100);
-      document.getElementById('sim-percent-text').textContent = `${percent}%`;
-      document.getElementById('sim-progress-bar').style.width = `${percent}%`;
-      document.getElementById('sim-creditos-atual').textContent = totalCreditos;
-      document.getElementById('sim-horas-atual').textContent = totalCreditos * 16;
-      document.getElementById('sim-marcos-atual').textContent = totalMarcos;
+  const totalCreditosPossiveis = SEMESTRES_JORNADA.reduce(
+    (total, sem) => total + sem.etapas.reduce(
+      (subtotal, et) => subtotal + et.creditos, 0
+    ), 0
+  );
 
-      const msgEl = document.getElementById('sim-status-msg');
-      if (percent === 0) {
-        msgEl.textContent = 'Selecione as etapas concluídas nos semestres abaixo para calcular seus créditos e marcos acadêmicos.';
-      } else if (percent < 50) {
-        msgEl.textContent = 'Fase de integralização de créditos e consolidação teórico-metodológica do projeto.';
-      } else if (percent < 100) {
-        msgEl.textContent = 'Fase avançada: qualificação, estágio de docência e escrita final da dissertação.';
-      } else {
-        msgEl.textContent = 'Parabéns! Todos os 30 créditos e requisitos regimentais para o título de Mestre(a) em Ciência da Informação foram concluídos!';
+  SEMESTRES_JORNADA.forEach(sem => {
+    sem.etapas.forEach(et => {
+      if (state.etapasConcluidas.has(et.id)) {
+        totalCreditos += et.creditos;
+        totalMarcos += 1;
       }
-    }
+    });
+  });
+
+  const percent = totalMarcosPossiveis
+    ? Math.round((totalMarcos / totalMarcosPossiveis) * 100)
+    : 0;
+
+  document.getElementById('sim-percent-text').textContent = `${percent}%`;
+
+  document.getElementById('sim-progress-bar').style.width = `${percent}%`;
+
+  document.getElementById('sim-creditos-atual').textContent = totalCreditos;
+
+  document.getElementById('sim-horas-atual').textContent = totalCreditos * 16;
+
+  document.getElementById('sim-marcos-atual').textContent = totalMarcos;
+
+  const msgEl = document.getElementById('sim-status-msg');
+
+  if (totalMarcos === 0) {
+
+    msgEl.textContent =
+      'Selecione as etapas concluídas nos semestres abaixo para calcular seus créditos e marcos acadêmicos.';
+
+  } else if (
+    totalMarcos === totalMarcosPossiveis &&
+    totalCreditos === totalCreditosPossiveis
+  ) {
+
+    msgEl.textContent =
+      'Simulação concluída! Você registrou os 30 créditos e os 9 marcos previstos nesta jornada acadêmica. A integralização oficial depende da validação institucional.';
+
+  } else {
+
+    msgEl.textContent =
+      `Você registrou ${totalCreditos} de ${totalCreditosPossiveis} créditos e ${totalMarcos} de ${totalMarcosPossiveis} marcos acadêmicos. Confira as etapas ainda pendentes.`;
+
+  }
+}
+
 
     // =========================================================================
     // 9. CONTROLE DE MODAIS E NAVEGAÇÃO ATIVA (SCROLLSPY)
